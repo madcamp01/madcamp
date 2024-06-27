@@ -28,9 +28,12 @@
         <activity
             android:name=".second.SecondFragment"
             android:exported="false" />
+
         <activity
             android:name=".first.FirstFragment"
             android:exported="false" />
+        <activity android:name=".first.AddressTab"
+            android:exported="false"/>
         <activity
             android:name=".ViewPagerAdapter"
             android:exported="false" />
