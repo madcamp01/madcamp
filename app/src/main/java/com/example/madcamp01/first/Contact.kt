@@ -3,12 +3,9 @@ package com.example.madcamp01.first
 data class Contact(
     val name: String,
     val status: String,
-    val imageResId: Int,
-    //val userId : Int
+    val imageResId: Int
 )
 
-fun getGroupedContacts(contacts: List<Contact>): Map<Char, List<Contact>> {
-    return contacts
-        .sortedBy { it.name }
-        .groupBy { it.name.first() }
+fun getSortedContacts(contacts: List<Contact>): List<Contact> {
+    return contacts.sortedBy { it.name }
 }
