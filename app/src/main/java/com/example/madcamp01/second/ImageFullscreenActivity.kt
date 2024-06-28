@@ -9,6 +9,9 @@ class ImageFullscreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageFullscreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // 앱의 상단바 숨기기
+        supportActionBar?.hide()
+
         super.onCreate(savedInstanceState)
         binding = ActivityImageFullscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
