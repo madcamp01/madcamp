@@ -7,7 +7,7 @@ import com.example.madcamp01.databinding.ContactItemBinding
 import com.example.madcamp01.R
 
 
-class ContactAdapter(private val contactList: List<Contact>, private val onItemClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(private var contactList: List<Contact>, private val onItemClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding = ContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,5 +32,9 @@ class ContactAdapter(private val contactList: List<Contact>, private val onItemC
             }
         }
 
+    }
+    fun updateData(newContacts: List<Contact>) {
+        contactList = newContacts
+        notifyDataSetChanged() // 데이터 변경을 어댑터에 알림
     }
 }
