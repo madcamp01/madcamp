@@ -44,4 +44,15 @@ class ContactDAO(context: Context) {
         db.close()
         return contacts
     }
+    fun updateDatabase(id: Int, name: String, phoneNumber: String, status: String) {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put("name", name)
+            put("phoneNumber", phoneNumber)
+            put("status", status)
+        }
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(id.toString())
+        db.update("Contacts", values, selection, selectionArgs)
+    }
 }
