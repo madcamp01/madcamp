@@ -1,9 +1,9 @@
 package com.example.madcamp01.second
 
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.databinding.ItemImageBinding
@@ -26,17 +26,13 @@ class ImageAdapter(private val imageList: List<Uri>) : RecyclerView.Adapter<Imag
             binding.imageView.setImageURI(imageUri)
             Log.d("ImageAdapter", "Binding image: $imageUri")
 
-            // Set OnTouchListener to zoom in/out the image
-            binding.imageView.setOnTouchListener { v, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        v.animate().scaleX(2f).scaleY(2f).setDuration(300).start()
-                    }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        v.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
-                    }
+            // Set OnClickListener to open image in fullscreen
+            binding.imageView.setOnClickListener {
+                val context = binding.root.context
+                val intent = Intent(context, ImageFullscreenActivity::class.java).apply {
+                    putExtra("imageUri", imageUri)
                 }
-                true
+                context.startActivity(intent)
             }
         }
     }
