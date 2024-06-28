@@ -3,6 +3,7 @@ package com.example.madcamp01.first
 data class Contact(
     val name: String,
     val status: String,
+    val phoneNumber:String,
     val imageResId: Int
 )
 

@@ -20,10 +20,12 @@ class AddressTab  : AppCompatActivity() {
 
         val name = intent.getStringExtra("name")
         val job = intent.getStringExtra("status")
+        val number = intent.getStringExtra("phoneNumber")
         val imageResId = intent.getIntExtra("imageResId", 0)
 
         findViewById<TextView>(R.id.textname).text = name
-        findViewById<TextView>(R.id.textPhoneNumber).text = job
+        findViewById<TextView>(R.id.textPhoneNumber).text = number
+        findViewById<TextView>(R.id.textStatus).text = job
         findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
     }
 }
