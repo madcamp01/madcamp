@@ -16,21 +16,21 @@ class ImageAdapter(private val imageList: List<Uri>) : RecyclerView.Adapter<Imag
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(imageList[position])
+        holder.bind(imageList[position], position)
     }
 
     override fun getItemCount(): Int = imageList.size
 
-    class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(imageUri: Uri) {
+    inner class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(imageUri: Uri, position: Int) {
             binding.imageView.setImageURI(imageUri)
             Log.d("ImageAdapter", "Binding image: $imageUri")
 
-            // Set OnClickListener to open image in fullscreen
             binding.imageView.setOnClickListener {
                 val context = binding.root.context
                 val intent = Intent(context, ImageFullscreenActivity::class.java).apply {
-                    putExtra("imageUri", imageUri)
+                    putParcelableArrayListExtra("imageList", ArrayList(imageList))
+                    putExtra("initialPosition", position)
                 }
                 context.startActivity(intent)
             }
