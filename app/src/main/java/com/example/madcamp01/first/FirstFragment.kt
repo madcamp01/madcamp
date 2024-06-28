@@ -1,6 +1,5 @@
 package com.example.madcamp01.first
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp01.databinding.FragmentFirstBinding
-import com.google.android.material.tabs.TabLayout
+import com.example.madcamp01.db.contacts.ContactDAO
 
 class FirstFragment : Fragment() {
 

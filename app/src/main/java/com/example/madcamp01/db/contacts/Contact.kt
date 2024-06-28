@@ -1,4 +1,4 @@
-package com.example.madcamp01.first
+package com.example.madcamp01.db.contacts
 
 data class Contact(
     val id:Int=0,

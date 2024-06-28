@@ -1,10 +1,10 @@
-package com.example.madcamp01.first
+package com.example.madcamp01.db.contacts
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.example.madcamp01.first.Contact
+import com.example.madcamp01.first.DBHelper
 
 class ContactDAO(context: Context) {
     private val dbHelper: DBHelper = DBHelper(context)

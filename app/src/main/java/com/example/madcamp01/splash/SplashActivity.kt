@@ -17,6 +17,6 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             //finish()
-        }, 3000) // 3초 동안 로딩 화면을 표시
+        }, 2000) // 2초 동안 로딩 화면을 표시
     }
 }
