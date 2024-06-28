@@ -25,7 +25,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-
+        contactDAO = ContactDAO(requireContext())
 
 
         return binding.root
@@ -33,7 +33,7 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contactDAO = ContactDAO(requireContext())
+
         //샘플 데이터 삽입
         if(contactDAO.getAllContacts().isEmpty()) {
             val contacts = listOf(
@@ -82,6 +82,7 @@ class FirstFragment : Fragment() {
         val sortedContacts = getSortedContacts(contacts) // ㄱㄴㄷ순 정렬
         contactAdapter = ContactAdapter(sortedContacts) { contact ->
             val intent = Intent(context, AddressTab::class.java).apply {
+                putExtra("id", contact.id)
                 putExtra("name", contact.name)
                 putExtra("status", contact.status)
                 putExtra("phoneNumber", contact.phoneNumber)
