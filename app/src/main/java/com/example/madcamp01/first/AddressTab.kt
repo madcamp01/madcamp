@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.madcamp01.R
+import com.example.madcamp01.db.contacts.ContactDAO
 
 
 class AddressTab : AppCompatActivity() {

@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp01.R
+import com.example.madcamp01.db.contacts.ContactDAO
 
 class ContactUpdatePopup : AppCompatActivity() {
     private lateinit var etName: EditText
