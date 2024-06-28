@@ -40,6 +40,8 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private fun setupRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(3, spacingInPixels, false))
         viewModel.imageList.observe(viewLifecycleOwner, { images ->
             binding.recyclerView.adapter = ImageAdapter(images)
             Log.d("SecondFragment", "RecyclerView setup complete")
