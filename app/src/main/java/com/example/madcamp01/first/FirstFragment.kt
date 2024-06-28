@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp01.databinding.FragmentFirstBinding
+import com.google.android.material.tabs.TabLayout
 
 class FirstFragment : Fragment() {
 
@@ -24,12 +25,14 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("contactDAO", "hello")
         contactDAO = ContactDAO(requireContext())
         //샘플 데이터 삽입
         if(contactDAO.getAllContacts().isEmpty()) {
@@ -88,8 +91,25 @@ class FirstFragment : Fragment() {
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = contactAdapter
-    }
 
+        Log.d("update", "before update")
+
+        binding.contactUpdateButton.setOnClickListener {
+            Log.d("update button", "update request")
+            val intent = Intent(context, ContactUpdatePopup::class.java)
+            startActivity(intent)
+        }
+
+    }
+    override fun onResume() {
+        super.onResume()
+        refreshData()
+    }
+    private fun refreshData() {
+        val contacts = contactDAO.getAllContacts()
+        val sortedContacts = getSortedContacts(contacts) // ㄱㄴㄷ순 정렬
+        contactAdapter.updateData(sortedContacts)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
