@@ -5,16 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.madcamp01.R
 
 
-class AddressTab  : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.address_tab, container, false)
+class AddressTab  : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.address_tab)
+
+        val name = intent.getStringExtra("name")
+        val job = intent.getStringExtra("status")
+        val imageResId = intent.getIntExtra("imageResId", 0)
+
+        findViewById<TextView>(R.id.textname).text = name
+        findViewById<TextView>(R.id.textPhoneNumber).text = job
+        findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
     }
 }

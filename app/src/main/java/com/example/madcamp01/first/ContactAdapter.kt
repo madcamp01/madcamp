@@ -7,7 +7,7 @@ import com.example.madcamp01.databinding.ContactItemBinding
 import com.example.madcamp01.R
 
 
-class ContactAdapter(private val contactList: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(private val contactList: List<Contact>, private val onItemClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding = ContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,11 +21,17 @@ class ContactAdapter(private val contactList: List<Contact>) : RecyclerView.Adap
 
     override fun getItemCount() = contactList.size
 
-    class ContactViewHolder(private val binding: ContactItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ContactViewHolder(private val binding: ContactItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             binding.contactName.text = contact.name
             binding.contactStatus.text = contact.status
             binding.contactImage.setImageResource(contact.imageResId)
+
+            itemView.setOnClickListener {
+                onItemClick(contact)
+            }
         }
+        // 아이템 클릭 리스너 설정
+
     }
 }
