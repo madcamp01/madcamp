@@ -1,7 +1,7 @@
 package com.example.madcamp01.DB.DAO
 
 import androidx.room.*
-import com.yourapp.database.entities.Place
+import com.example.madcamp01.DB.Entities.Place
 
 @Dao
 interface PlaceDao {
