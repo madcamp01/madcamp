@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp01.databinding.FragmentFirstBinding
-import com.example.madcamp01.db.contacts.ContactDAO
+import com.example.madcamp01.DB.contacts.ContactDAO
 
 class FirstFragment : Fragment() {
 
