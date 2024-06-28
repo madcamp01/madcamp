@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.databinding.ContactItemBinding
-import com.example.madcamp01.db.contacts.Contact
+import com.example.madcamp01.DB.contacts.Contact
 
 
 class ContactAdapter(private var contactList: List<Contact>, private val onItemClick: (Contact) -> Unit) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {

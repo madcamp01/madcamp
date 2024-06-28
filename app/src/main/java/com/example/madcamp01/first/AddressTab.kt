@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp01.R
-import com.example.madcamp01.db.contacts.ContactDAO
+import com.example.madcamp01.DB.contacts.ContactDAO
 
 
 class AddressTab : AppCompatActivity() {
