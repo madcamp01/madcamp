@@ -32,6 +32,7 @@ class AddressTab : AppCompatActivity() {
         val textStatus: TextView = findViewById(R.id.textStatus)
         val imageView: ImageView = findViewById(R.id.imageView)
         val buttonEdit: Button = findViewById(R.id.buttonEdit)
+        val buttonDelete:Button = findViewById(R.id.deleteButton)
 
         // Setting initial values
         textName.text = name
@@ -53,7 +54,12 @@ class AddressTab : AppCompatActivity() {
             visibility = View.GONE
         }
 
-        // Adding EditTexts to the parent layout
+        buttonDelete.setOnClickListener(){
+            contactDAO.deleteContact(intent.getIntExtra("id",-1))
+            finish()
+        }
+        // A
+        // dding EditTexts to the parent layout
         val parentLayout: LinearLayout = findViewById(R.id.phone_number_frame)
         parentLayout.addView(editTextName, 0)
         parentLayout.addView(editTextPhoneNumber, 1)
@@ -68,6 +74,8 @@ class AddressTab : AppCompatActivity() {
                 editTextPhoneNumber.visibility = View.VISIBLE
                 textStatus.visibility = View.GONE
                 editTextStatus.visibility = View.VISIBLE
+                buttonDelete.visibility = View.VISIBLE
+
                 buttonEdit.text = "저장"
             } else {
                 val newName = editTextName.text.toString()
@@ -85,6 +93,7 @@ class AddressTab : AppCompatActivity() {
                 editTextPhoneNumber.visibility = View.GONE
                 textStatus.visibility = View.VISIBLE
                 editTextStatus.visibility = View.GONE
+                buttonDelete.visibility = View.GONE
                 buttonEdit.text = "편집"
             }
         }

@@ -55,4 +55,11 @@ class ContactDAO(context: Context) {
         val selectionArgs = arrayOf(id.toString())
         db.update("Contacts", values, selection, selectionArgs)
     }
+    fun deleteContact(id: Int) {
+        val db = dbHelper.writableDatabase
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(id.toString())
+        db.delete("Contacts", selection, selectionArgs)
+    }
+
 }
