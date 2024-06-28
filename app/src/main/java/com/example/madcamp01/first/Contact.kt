@@ -1,6 +1,7 @@
 package com.example.madcamp01.first
 
 data class Contact(
+    val id:Int=0,
     val name: String,
     val status: String,
     val phoneNumber:String,
