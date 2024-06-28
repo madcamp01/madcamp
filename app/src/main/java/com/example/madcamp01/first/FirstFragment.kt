@@ -1,5 +1,6 @@
 package com.example.madcamp01.first
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.madcamp01.R
 import android.view.LayoutInflater
@@ -51,7 +52,14 @@ class FirstFragment : Fragment() {
         )
 
         val sortedContacts = getSortedContacts(contacts) // ㄱㄴㄷ순 정렬
-        contactAdapter = ContactAdapter(sortedContacts)
+        contactAdapter = ContactAdapter(sortedContacts) { contact ->
+            val intent = Intent(context, AddressTab::class.java).apply {
+                putExtra("name", contact.name)
+                putExtra("status", contact.status)
+                putExtra("imageResId", contact.imageResId)
+            }
+            startActivity(intent)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = contactAdapter
     }
