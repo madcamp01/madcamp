@@ -31,7 +31,6 @@ class ContactAdapter(private val contactList: List<Contact>, private val onItemC
                 onItemClick(contact)
             }
         }
-        // 아이템 클릭 리스너 설정
 
     }
 }

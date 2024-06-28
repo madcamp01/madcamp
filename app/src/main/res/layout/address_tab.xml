@@ -41,14 +41,16 @@
                 android:layout_height="wrap_content"
                 android:text="휴대전화: "
                 android:textSize="18sp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="7dp"/>
             <TextView
                 android:id="@+id/textPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="010-1234-5678"
                 android:textSize="18sp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="7dp"/>
         </LinearLayout>
 
         <TextView
@@ -57,7 +59,8 @@
             android:layout_height="wrap_content"
             android:text="직업"
             android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="7dp"/>
     </LinearLayout>
 
 
