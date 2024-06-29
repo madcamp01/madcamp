@@ -10,10 +10,10 @@ interface ContactDao {
     suspend fun insertContact(contact: Contact)
 
     @Query("SELECT * FROM Contact WHERE personId = :personId")
-    fun getContactByIdLive(personId: Int): LiveData<Contact?>
+    suspend fun getContactById(personId: Int): Contact?
 
     @Query("SELECT * FROM Contact")
-    fun getAllContactsLive():LiveData<List<Contact>>
+    suspend fun getAllContacts(): List<Contact>
 
     @Update
     suspend fun updateContact(contact: Contact)
