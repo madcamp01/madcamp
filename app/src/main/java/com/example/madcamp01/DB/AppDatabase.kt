@@ -29,20 +29,34 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun contactImageCrossRefDao(): ContactImageCrossRefDao
     abstract fun placeReviewCrossRefDao(): PlaceReviewCrossRefDao
 
+
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
+
                     "app_database"
                 ).build()
                 INSTANCE = instance
                 instance
             }
         }
+
+        @Volatile private var instance: AppDatabase? = null
+
+        fun getInstance(context: Context): AppDatabase =
+            instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
+            }
+
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(context.applicationContext,
+                AppDatabase::class.java, "MyDatabase.db")
+                .build()
     }
 }
