@@ -2,7 +2,7 @@ package com.example.madcamp01.DB.DAO
 
 import androidx.room.*
 import com.example.madcamp01.DB.Entities.ContactImageCrossRef
-
+@Dao
 interface ContactImageCrossRefDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

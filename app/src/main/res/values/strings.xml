@@ -45,4 +45,5 @@
     </string>
     <string name="title_activity_contact_update_popup">ContactUpdatePopup</string>
     <string name="fullscreen_image">Fullscreen Image</string>
+    <string name="title_activity_contact_detail">ContactDetailActivity</string>
 </resources>
