@@ -8,12 +8,24 @@ interface ReviewDao {
     @Insert
     suspend fun insertReview(review: Review)
 
+    @Insert
+    suspend fun insertAll(reviews: List<Review>)
+
     @Query("SELECT * FROM Review WHERE reviewId = :reviewId")
     suspend fun getReviewById(reviewId: Int): Review?
+
+    @Query("SELECT * FROM Review WHERE imageId = :imageId")
+    suspend fun getReviewsByImageId(imageId: Int): List<Review>
+
+    @Query("SELECT * FROM Review")
+    suspend fun getAllReviews(): List<Review>
 
     @Update
     suspend fun updateReview(review: Review)
 
     @Delete
     suspend fun deleteReview(review: Review)
+
+    @Query("SELECT * FROM Review WHERE imageId = :imageId")
+    suspend fun getReviewByImageId(imageId: Int): Review?
 }

@@ -2,6 +2,7 @@ package com.example.madcamp01.second
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -43,9 +44,21 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(3, spacingInPixels, false))
         viewModel.imageList.observe(viewLifecycleOwner, { images ->
-            binding.recyclerView.adapter = ImageAdapter(images)
+            // Extract Uri from Image objects
+            val imageUris = images.map { it.imageSrc }
+            binding.recyclerView.adapter = ImageAdapter(imageUris) { imageUri, position ->
+                // Handle item click, for example:
+                // Show image in full screen
+                navigateToFullscreenActivity(imageUris, position)
+            }
             Log.d("SecondFragment", "RecyclerView setup complete")
         })
+    }
+
+    // 이미지 전체 화면으로 보기로 이동하는 함수
+    private fun navigateToFullscreenActivity(imageList: List<Uri>, position: Int) {
+        val intent = ImageFullscreenActivity.newIntent(requireContext(), imageList, position)
+        startActivity(intent)
     }
 
     override fun onRequestPermissionsResult(

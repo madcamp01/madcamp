@@ -1,5 +1,6 @@
 package com.example.madcamp01.DB.DAO
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.madcamp01.DB.Entities.Contact
@@ -14,6 +15,9 @@ interface ContactDao {
 
     @Query("SELECT * FROM Contact")
     fun getAllContactsLive():LiveData<List<Contact>>
+
+    @Query("SELECT * FROM Contact WHERE profilePicture = :imageUri")
+    suspend fun getContactByProfilePicture(imageUri: Uri): Contact?
 
     @Update
     suspend fun updateContact(contact: Contact)

@@ -11,6 +11,9 @@ interface ImageDao {
     @Query("SELECT * FROM Image WHERE imageId = :imageId")
     suspend fun getImageById(imageId: Int): Image?
 
+    @Query("SELECT * FROM Image WHERE imageSrc = :imageUri")
+    suspend fun getImageByUri(imageUri: String): Image?
+
     @Update
     suspend fun updateImage(image: Image)
 
