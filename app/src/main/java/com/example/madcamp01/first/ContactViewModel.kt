@@ -8,11 +8,11 @@ import com.example.madcamp01.DB.Entities.Contact
 import kotlinx.coroutines.launch
 
 class ContactViewModel(private val contactDao: ContactDao) : ViewModel() {
-    val allContacts: LiveData<List<Contact>> = contactDao.getAllContactsLive()
+//    val allContacts: List<Contact> = contactDao.getAllContacts()
 
-    fun getContactById(personId: Int): LiveData<Contact?> {
-        return contactDao.getContactByIdLive(personId)
-    }
+//    suspend fun getContactById(personId: Int): Contact? {
+//        return contactDao.getContactById(personId)
+//    }
 
     fun insertContact(contact: Contact) {
         viewModelScope.launch {
