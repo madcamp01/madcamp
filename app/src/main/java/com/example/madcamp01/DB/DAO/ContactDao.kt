@@ -11,6 +11,9 @@ interface ContactDao {
     @Query("SELECT * FROM Contact WHERE personId = :personId")
     suspend fun getContactById(personId: Int): Contact?
 
+    @Query("SELECT * FROM Contact")
+    suspend fun getAllContacts():List<Contact>
+
     @Update
     suspend fun updateContact(contact: Contact)
 
