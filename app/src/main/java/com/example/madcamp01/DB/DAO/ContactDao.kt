@@ -1,5 +1,6 @@
 package com.example.madcamp01.DB.DAO
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.madcamp01.DB.Entities.Contact
 
@@ -9,10 +10,10 @@ interface ContactDao {
     suspend fun insertContact(contact: Contact)
 
     @Query("SELECT * FROM Contact WHERE personId = :personId")
-    suspend fun getContactById(personId: Int): Contact?
+    fun getContactByIdLive(personId: Int): LiveData<Contact?>
 
     @Query("SELECT * FROM Contact")
-    suspend fun getAllContacts():List<Contact>
+    fun getAllContactsLive():LiveData<List<Contact>>
 
     @Update
     suspend fun updateContact(contact: Contact)
