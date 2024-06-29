@@ -12,7 +12,7 @@ import com.example.madcamp01.DB.Entities.*
         Contact::class,
         Image::class,
         ContactReviewCrossRef::class,
-        ImageReviewCrossRef::class,
+        PlaceReviewCrossRef::class,
         ContactImageCrossRef::class
     ],
     version = 1
@@ -22,4 +22,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun reviewDao(): ReviewDao
     abstract fun contactDao(): ContactDao
     abstract fun imageDao(): ImageDao
+    abstract fun contactImageCrossRefDao(): ContactImageCrossRefDao
+    abstract fun placeReviewCrossRefDao(): PlaceReviewCrossRefDao
 }
