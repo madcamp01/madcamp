@@ -17,9 +17,6 @@ interface PlaceReviewCrossRefDao {
     @Query("SELECT * FROM PlaceReviewCrossRef where placeId = :placeId AND reviewId = :reviewId")
     suspend fun getPlaceReviewCrossRef(placeId : Int, reviewId : Int) : PlaceReviewCrossRef?
 
-    @Query("SELECT * FROM PlaceReviewCrossRef where placeId = :placeId")
-    suspend fun getPlaceForReviews(placeId : Int) : List<PlaceReviewCrossRef>
-
     @Query("SELECT * FROM PlaceReviewCrossRef where reviewId = :reviewId")
     suspend fun getReviewsForPlace(reviewId : Int) : List<PlaceReviewCrossRef>
 }
