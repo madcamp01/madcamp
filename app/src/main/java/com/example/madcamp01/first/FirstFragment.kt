@@ -17,8 +17,7 @@ class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
-    private lateinit var contactAdapter: ContactAdapter
-    private lateinit var contactDAO: ContactDAO
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
