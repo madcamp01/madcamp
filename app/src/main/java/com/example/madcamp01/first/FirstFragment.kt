@@ -33,7 +33,7 @@ class FirstFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val database = AppDatabase.getDatabase(requireContext())
+        val database = AppDatabase.getInstance(requireContext())
 
         lifecycleScope.launch {
             val contacts = getContactsFromDb(database)
@@ -67,7 +67,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun loadContacts() {
-        val database = AppDatabase.getDatabase(requireContext())
+        val database = AppDatabase.getInstance(requireContext())
         lifecycleScope.launch {
             val contacts = getContactsFromDb(database)
             contactAdapter = ContactAdapter(contacts) { contact ->
