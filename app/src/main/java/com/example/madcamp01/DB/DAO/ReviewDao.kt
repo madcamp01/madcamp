@@ -20,8 +20,8 @@ interface ReviewDao {
     @Query("SELECT * FROM Review WHERE personId = :contactId")
     suspend fun getReviewsByContactId(contactId: Int): List<Review>
 
-    @Query("SELECT * FROM Review")
-    suspend fun getAllReviews(): List<Review>
+    @Query("SELECT * FROM Review WHERE imageId = :imageId")
+    suspend fun getReviewsForImage(imageId: Int): List<Review>
 
     @Update
     suspend fun updateReview(review: Review)

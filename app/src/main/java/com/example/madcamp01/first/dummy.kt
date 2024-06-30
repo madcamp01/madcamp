@@ -6,8 +6,26 @@ import com.example.madcamp01.DB.Entities.Review
 import com.example.madcamp01.R
 
 
-// 기존의 고정된 이미지 리스트 삭제
-val images: List<Image> = emptyList()  // 초기에는 빈 리스트
+val images = listOf(
+    Image(1, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(2, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(3, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(4, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(5, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(6, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(7, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(8, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(9, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(10, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(11, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(12, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(13, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(14, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(15, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(16, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(17, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),
+    Image(18, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image))
+)
 
 val contacts = listOf(
     Contact(1, "John Doe", "010-1234-5678", "Friend from work", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.sample_square_image)),

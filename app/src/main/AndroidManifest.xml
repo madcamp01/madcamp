@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Madcamp01.AppCompat"
         tools:targetApi="31">
         <activity
+            android:name=".second.FullScreenImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ContactDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Madcamp01.AppCompat" />
