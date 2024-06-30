@@ -2,34 +2,34 @@ package com.example.madcamp01.second
 
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp01.databinding.ItemImageBinding
+import com.example.madcamp01.DB.Entities.Image
+import com.example.madcamp01.R
 
 class ImageAdapter(
-    private val imageList: List<Uri>,
-    private val onItemClick: (Uri, Int) -> Unit
+    private val images: List<Image>,
+    private val itemClickListener: (Uri, Int) -> Unit
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
+    class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val binding = ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ImageViewHolder(binding)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+        return ImageViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(imageList[position], position)
-    }
-
-    override fun getItemCount(): Int = imageList.size
-
-    inner class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(imageUri: Uri, position: Int) {
-            binding.imageView.setImageURI(imageUri)
-
-            binding.imageView.setOnClickListener {
-                onItemClick(imageUri, position)
-            }
+        val image = images[position]
+        holder.imageView.setImageURI(image.imageSrc)
+        holder.imageView.setOnClickListener {
+            itemClickListener(image.imageSrc, image.imageId)
         }
     }
-}
 
+    override fun getItemCount(): Int = images.size
+}
