@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="8dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/ratingTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/commentTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="4dp" />
+                <RatingBar
+                    android:id="@+id/reviewRate"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" />
 
-        <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:textSize="12sp"
-            android:textColor="#888888" />
+                <TextView
+                    android:id="@+id/commentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:textColor="#888888"
+                    android:textSize="12sp" />
+
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/select_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-</LinearLayout>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="10dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

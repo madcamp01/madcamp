@@ -82,6 +82,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.fragment.ktx)
     kapt(libs.androidx.room.compiler)
-    implementation ("com.kakao.sdk:v2-navi:2.20.1")
+    implementation ("com.kakao.maps.open:android:2.9.5")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

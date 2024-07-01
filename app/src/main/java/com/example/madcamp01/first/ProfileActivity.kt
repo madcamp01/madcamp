@@ -76,7 +76,7 @@ class ProfileActivity : AppCompatActivity() {
         textStatus = findViewById(R.id.textStatus)
         editTextStatus = findViewById(R.id.editTextStatus)
         buttonEdit = findViewById(R.id.buttonEdit)
-        deleteButton = findViewById(R.id.deleteButton)
+//        deleteButton = findViewById(R.id.deleteButton)
         reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
         reviewEditButton = findViewById(R.id.reviewEditButton)
         deleteSelectedReviewsButton = findViewById(R.id.deleteSelectedReviewsButton)
@@ -105,9 +105,9 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
-        deleteButton.setOnClickListener {
-            deleteContact()
-        }
+//        deleteButton.setOnClickListener {
+//            deleteContact()
+//        }
 
         reviewEditButton.setOnClickListener {
             toggleReviewEditMode(true)
@@ -238,7 +238,7 @@ class ProfileActivity : AppCompatActivity() {
             editTextStatus.visibility = View.VISIBLE
             editTextStatus.setText(contact.memo)
 
-            deleteButton.visibility = View.VISIBLE
+//            deleteButton.visibility = View.VISIBLE
             imageOverlay.visibility = View.VISIBLE
             imageAddIcon.visibility = View.VISIBLE
         } else {
@@ -252,7 +252,7 @@ class ProfileActivity : AppCompatActivity() {
             textStatus.visibility = View.VISIBLE
             editTextStatus.visibility = View.GONE
 
-            deleteButton.visibility = View.GONE
+//            deleteButton.visibility = View.GONE
             imageOverlay.visibility = View.GONE
             imageAddIcon.visibility = View.GONE
         }
@@ -279,17 +279,17 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteContact() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val database = AppDatabase.getInstance(applicationContext)
-            database.contactDao().deleteContact(contact)
-
-            withContext(Dispatchers.Main) {
-                setResult(RESULT_OK) // 삭제 후 결과 설정
-                finish()
-            }
-        }
-    }
+//    private fun deleteContact() {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val database = AppDatabase.getInstance(applicationContext)
+//            database.contactDao().deleteContact(contact)
+//
+//            withContext(Dispatchers.Main) {
+//                setResult(RESULT_OK) // 삭제 후 결과 설정
+//                finish()
+//            }
+//        }
+//    }
 
     private fun loadReviews() {
         CoroutineScope(Dispatchers.IO).launch {

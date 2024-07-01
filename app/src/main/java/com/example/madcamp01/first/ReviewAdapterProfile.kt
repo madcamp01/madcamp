@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.R
@@ -43,7 +44,9 @@ class ReviewAdapterProfile(
 
     fun updateReviews(newReviews: List<Review>) {
         reviews = newReviews
+        selectedReviews.clear()
         notifyDataSetChanged()
+
     }
 
     fun getSelectedReviews(): List<Review> {
@@ -52,13 +55,13 @@ class ReviewAdapterProfile(
 
     class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val reviewComment: TextView = itemView.findViewById(R.id.commentTextView)
-        private val reviewRating: TextView = itemView.findViewById(R.id.ratingTextView)
+        private val reviewRating: RatingBar = itemView.findViewById(R.id.reviewRate)
         private val reviewDate: TextView = itemView.findViewById(R.id.dateTextView)
         val selectCheckBox: CheckBox = itemView.findViewById(R.id.select_checkbox)
 
         fun bind(review: Review) {
             reviewComment.text = review.comment
-            reviewRating.text = review.rating.toString()
+            reviewRating.rating = review.rating.toFloat()
             reviewDate.text = review.date
         }
     }
