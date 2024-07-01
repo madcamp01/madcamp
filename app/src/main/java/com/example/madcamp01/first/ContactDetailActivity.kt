@@ -114,6 +114,11 @@ class ContactDetailActivity : AppCompatActivity() {
             deleteButton.visibility = View.GONE
         }
     }
+    override fun onBackPressed() {
+        setResult(RESULT_OK)
+        super.onBackPressed()
+    }
+
 
     private fun saveContact() {
         val updatedContact = contact.copy(
@@ -130,6 +135,7 @@ class ContactDetailActivity : AppCompatActivity() {
                 contact = updatedContact
                 toggleEditMode(false)
                 loadContact()
+                setResult(RESULT_OK)
             }
         }
     }

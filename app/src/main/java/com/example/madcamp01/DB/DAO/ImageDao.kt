@@ -11,7 +11,7 @@ interface ImageDao {
     suspend fun getAllImages(): List<Image>
 
     @Insert
-    suspend fun insertImage(image: Image)
+    suspend fun insertImage(image: Image):Long
 
     @Query("SELECT * FROM Image WHERE imageSrc = :uri")
     suspend fun getImageByUri(uri: String): Image?

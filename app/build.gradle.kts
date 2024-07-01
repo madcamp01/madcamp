@@ -82,5 +82,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.fragment.ktx)
     kapt(libs.androidx.room.compiler)
+    implementation ("com.kakao.sdk:v2-navi:2.20.1")
 
 }

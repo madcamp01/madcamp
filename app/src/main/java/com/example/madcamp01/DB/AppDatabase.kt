@@ -9,14 +9,17 @@ import com.example.madcamp01.DB.Entities.Contact
 import com.example.madcamp01.DB.Entities.Image
 import com.example.madcamp01.DB.Entities.Review
 import com.example.madcamp01.DB.DAO.ContactDao
+import com.example.madcamp01.DB.DAO.PlaceDao
 import com.example.madcamp01.DB.DAO.ReviewDao
+import com.example.madcamp01.DB.Entities.Place
 
-@Database(entities = [Contact::class, Image::class, Review::class], version = 2) // 버전 증가
+@Database(entities = [Contact::class, Image::class, Review::class, Place::class], version = 2) // 버전 증가
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contactDao(): ContactDao
     abstract fun imageDao(): ImageDao
     abstract fun reviewDao(): ReviewDao
+    abstract fun placeDao(): PlaceDao
 
     companion object {
         @Volatile
