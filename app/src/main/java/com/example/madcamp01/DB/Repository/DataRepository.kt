@@ -41,4 +41,8 @@ class DataRepository(
     suspend fun getReviewsForImage(imageId: Int): List<Review> {
         return reviewDao.getReviewsForImage(imageId)
     }
+
+    suspend fun getImageById(imageId: Int): Image? {
+        return imageDao.getImageById(imageId)
+    }
 }
