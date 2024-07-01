@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.R
 import com.example.madcamp01.DB.Entities.Contact
 
-class ContactAdapter(private val contacts: List<Contact>,
+class ContactAdapter(private var contacts: List<Contact>,
                      private val onItemClick: (Contact) -> Unit)
     : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
@@ -27,6 +27,11 @@ class ContactAdapter(private val contacts: List<Contact>,
     }
 
     override fun getItemCount(): Int = contacts.size
+
+    fun updateContacts(newContacts: List<Contact>) {
+        contacts = newContacts
+        notifyDataSetChanged()
+    }
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val contactImage: ImageView = itemView.findViewById(R.id.contact_image)
