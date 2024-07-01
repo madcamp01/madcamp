@@ -1,5 +1,6 @@
 package com.example.madcamp01.second
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
@@ -8,7 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.DB.AppDatabase
+import com.example.madcamp01.DB.Entities.Image
 import com.example.madcamp01.DB.Entities.Review
+import com.example.madcamp01.DB.Entities.Contact
 import com.example.madcamp01.DB.Repository.DataRepository
 import com.example.madcamp01.R
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +46,14 @@ class FullScreenImageActivity : AppCompatActivity() {
                         withContext(Dispatchers.IO) { repository.getReviewsByImageId(imageId) }
                     reviewAdapter = ReviewAdapter(reviews)
                     reviewRecyclerView.adapter = reviewAdapter
+
+                    // 리뷰의 personId를 사용하여 Contact에서 profilePictureUri를 가져와 표시
+                    val firstReview = reviews.firstOrNull()
+                    if (firstReview != null) {
+                        val contact = database.contactDao().getContactByPersonId(firstReview.personId)
+                        val profilePictureUri = contact.profilePicture
+                        fullScreenImageView.setImageURI(profilePictureUri)
+                    }
 
                     // 이미지를 표시
                     val imageUri = Uri.parse(image.imageSrc.toString()) // image 객체에서 URI 추출
