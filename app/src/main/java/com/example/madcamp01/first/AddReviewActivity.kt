@@ -92,7 +92,6 @@ class AddReviewActivity : AppCompatActivity() {
                 date = currentDate
             )
             database.reviewDao().insertReview(review)
-
             withContext(Dispatchers.Main) {
                 Toast.makeText(this@AddReviewActivity, "리뷰가 추가되었습니다", Toast.LENGTH_SHORT).show()
                 finish()
