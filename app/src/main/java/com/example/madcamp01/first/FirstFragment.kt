@@ -50,6 +50,7 @@ class FirstFragment : Fragment() {
 
         return view
     }
+    //수정
 
     private fun loadContacts() {
         val database = AppDatabase.getInstance(requireContext())
