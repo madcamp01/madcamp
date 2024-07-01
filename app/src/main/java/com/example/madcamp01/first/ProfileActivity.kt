@@ -40,6 +40,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var deleteButton: Button
     private lateinit var reviewRecyclerView: RecyclerView
     private lateinit var reviewEditButton: Button
+    private lateinit var deleteSelectedReviewsButton: Button
+    private lateinit var cancelEditReviewsButton: Button
+    private lateinit var imageOverlay: View
+    private lateinit var imageAddIcon: ImageView
 
     private var contactId: Int = -1
     private lateinit var contact: Contact
@@ -75,16 +79,22 @@ class ProfileActivity : AppCompatActivity() {
         deleteButton = findViewById(R.id.deleteButton)
         reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
         reviewEditButton = findViewById(R.id.reviewEditButton)
+        deleteSelectedReviewsButton = findViewById(R.id.deleteSelectedReviewsButton)
+        cancelEditReviewsButton = findViewById(R.id.cancelEditReviewsButton)
+        imageOverlay = findViewById(R.id.imageOverlay)
+        imageAddIcon = findViewById(R.id.imageAddIcon)
 
         reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        contactId = 9
+        contactId = 1
 
         loadContact()
         loadReviews()
 
         imageView.setOnClickListener {
-            showImagePickerDialog()
+            if (isEditMode) {
+                showImagePickerDialog()
+            }
         }
 
         buttonEdit.setOnClickListener {
@@ -100,7 +110,15 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         reviewEditButton.setOnClickListener {
-            toggleReviewEditMode(!isReviewEditMode)
+            toggleReviewEditMode(true)
+        }
+
+        deleteSelectedReviewsButton.setOnClickListener {
+            deleteSelectedReviews()
+        }
+
+        cancelEditReviewsButton.setOnClickListener {
+            toggleReviewEditMode(false)
         }
     }
 
@@ -126,10 +144,19 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun checkStoragePermissionAndPickImage() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            pickImage.launch("image/*")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                pickImage.launch("image/*")
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+            }
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                pickImage.launch("image/*")
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+            }
         }
     }
 
@@ -212,6 +239,8 @@ class ProfileActivity : AppCompatActivity() {
             editTextStatus.setText(contact.memo)
 
             deleteButton.visibility = View.VISIBLE
+            imageOverlay.visibility = View.VISIBLE
+            imageAddIcon.visibility = View.VISIBLE
         } else {
             buttonEdit.text = "편집"
             textName.visibility = View.VISIBLE
@@ -224,6 +253,8 @@ class ProfileActivity : AppCompatActivity() {
             editTextStatus.visibility = View.GONE
 
             deleteButton.visibility = View.GONE
+            imageOverlay.visibility = View.GONE
+            imageAddIcon.visibility = View.GONE
         }
     }
 
@@ -285,11 +316,31 @@ class ProfileActivity : AppCompatActivity() {
     private fun toggleReviewEditMode(enabled: Boolean) {
         isReviewEditMode = enabled
         if (enabled) {
-            reviewEditButton.text = "리뷰 삭제 모드 종료"
+            reviewEditButton.visibility = View.GONE
+            deleteSelectedReviewsButton.visibility = View.VISIBLE
+            cancelEditReviewsButton.visibility = View.VISIBLE
         } else {
-            reviewEditButton.text = "리뷰 편집"
+            reviewEditButton.visibility = View.VISIBLE
+            deleteSelectedReviewsButton.visibility = View.GONE
+            cancelEditReviewsButton.visibility = View.GONE
         }
         loadReviews() // 편집 모드 상태로 리뷰 로드
+    }
+
+    private fun deleteSelectedReviews() {
+        val adapter = reviewRecyclerView.adapter as? ReviewAdapterProfile
+        val selectedReviews = adapter?.getSelectedReviews() ?: emptyList()
+        CoroutineScope(Dispatchers.IO).launch {
+            val database = AppDatabase.getInstance(applicationContext)
+            selectedReviews.forEach { review ->
+                database.reviewDao().deleteReview(review)
+            }
+
+            withContext(Dispatchers.Main) {
+                toggleReviewEditMode(false)
+                loadReviews() // 선택된 리뷰 삭제 후 다시 로드
+            }
+        }
     }
 
     companion object {

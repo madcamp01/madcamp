@@ -3,9 +3,12 @@ package com.example.madcamp01.DB.Entities
 import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.madcamp01.DB.Converters
 import com.example.madcamp01.DB.Entities.Review
 
 @Entity
+@TypeConverters(Converters::class)
 data class Contact(
     @PrimaryKey(autoGenerate = true) val personId: Int,     /*아이디*/
     val personName: String,     /*이름 (본인 설정 / 내 설정)*/
