@@ -29,19 +29,23 @@ class FullScreenImageActivity : AppCompatActivity() {
         reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
         reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        val imageUri: Uri? = intent.getParcelableExtra("IMAGE_URI")
+        val imageId: Int = intent.getIntExtra("IMAGE_ID", -1)
 
-        if (imageUri != null) {
-            fullScreenImageView.setImageURI(imageUri)
-
+        if (imageId != -1) {
             val database = AppDatabase.getInstance(this)
-            val repository = DataRepository(database.contactDao(), database.imageDao(), database.reviewDao())
+            val repository =
+                DataRepository(database.contactDao(), database.imageDao(), database.reviewDao())
             lifecycleScope.launch {
-                val image = repository.getImageByUri(imageUri)
+                val image = withContext(Dispatchers.IO) { repository.getImageById(imageId) }
                 if (image != null) {
-                    val reviews = withContext(Dispatchers.IO) { repository.getReviewsByImageId(image.imageId) }
+                    // 이미지를 가져왔으니 해당 이미지의 리뷰들을 가져옴
+                    val reviews =
+                        withContext(Dispatchers.IO) { repository.getReviewsByImageId(imageId) }
                     reviewAdapter = ReviewAdapter(reviews)
                     reviewRecyclerView.adapter = reviewAdapter
+
+                    // 이미지를 표시
+                    fullScreenImageView.setImageURI(Uri.parse(image.toString()))
                 }
             }
         }
