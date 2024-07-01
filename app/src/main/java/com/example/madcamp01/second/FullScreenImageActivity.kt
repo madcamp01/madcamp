@@ -1,15 +1,18 @@
-// FullScreenImageActivity.kt
 package com.example.madcamp01.second
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.DB.AppDatabase
-import com.example.madcamp01.DB.Entities.Contact
 import com.example.madcamp01.DB.Entities.Image
+import com.example.madcamp01.DB.Entities.Review
+import com.example.madcamp01.DB.Entities.Contact
+import com.example.madcamp01.DB.Repository.DataRepository
 import com.example.madcamp01.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,48 +20,52 @@ import kotlinx.coroutines.withContext
 
 class FullScreenImageActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: ViewPager2
-    private lateinit var imagePagerAdapter: ImagePagerAdapter
-    private lateinit var profileImageView: ImageView
-    private var images: List<Image> = listOf()
+    private lateinit var fullScreenImageView: ImageView
+    private lateinit var reviewRecyclerView: RecyclerView
+    private lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_screen_image)
 
-        viewPager = findViewById(R.id.viewPager)
-        profileImageView = findViewById(R.id.profileImageView)
+        fullScreenImageView = findViewById(R.id.fullScreenImageView)
+        reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
+        reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val imageId: Int = intent.getIntExtra("IMAGE_ID", -1)
-        val reviewId: Int = intent.getIntExtra("REVIEW_ID", -1)
-        val database = AppDatabase.getInstance(this)
 
-        lifecycleScope.launch {
-            images = withContext(Dispatchers.IO) { database.imageDao().getAllImages() }
-            imagePagerAdapter = ImagePagerAdapter(images) { position ->
-                // 이미지를 클릭했을 때 원하는 동작을 수행할 수 있습니다.
-                // 예를 들어, 특정 이미지의 리뷰를 불러오거나 다른 처리를 할 수 있습니다.
-                val image = images[position]
-                // 클릭된 이미지와 관련된 처리를 여기에 추가합니다.
-            }
-            viewPager.adapter = imagePagerAdapter
-            val initialPosition = images.indexOfFirst { it.imageId == imageId }
-            viewPager.setCurrentItem(initialPosition, false)
-        }
-
-        if (reviewId != -1) {
+        if (imageId != -1) {
+            val database = AppDatabase.getInstance(this)
+            val repository =
+                DataRepository(database.contactDao(), database.imageDao(), database.reviewDao())
             lifecycleScope.launch {
-                val personId = withContext(Dispatchers.IO) { database.reviewDao().getPersonIdByReviewId(reviewId) }
-                personId?.let {
-                    val contact = withContext(Dispatchers.IO) { database.contactDao().getContactById(it) }
-                    contact?.let { contact ->
-                        val profileUri = Uri.parse(contact.profilePicture.toString())
-                        profileImageView.setImageURI(profileUri)
+                val image = withContext(Dispatchers.IO) { repository.getImageById(imageId) }
+                if (image != null) {
+                    // 이미지를 가져왔으니 해당 이미지의 리뷰들을 가져옴
+                    val reviews =
+                        withContext(Dispatchers.IO) { repository.getReviewsByImageId(imageId) }
+                    reviewAdapter = ReviewAdapter(reviews)
+                    reviewRecyclerView.adapter = reviewAdapter
+
+                    // 리뷰의 personId를 사용하여 Contact에서 profilePictureUri를 가져와 표시
+                    val firstReview = reviews.firstOrNull()
+                    if (firstReview != null) {
+                        val contact = database.contactDao().getContactByPersonId(firstReview.personId)
+                        val profilePictureUri = contact.profilePicture
+                        fullScreenImageView.setImageURI(profilePictureUri)
                     }
+
+                    // 이미지를 표시
+                    val imageUri = Uri.parse(image.imageSrc.toString()) // image 객체에서 URI 추출
+                    fullScreenImageView.setImageURI(imageUri)
                 }
             }
         }
 
         supportActionBar?.hide()
+
+        fullScreenImageView.setOnClickListener {
+            finish()
+        }
     }
 }

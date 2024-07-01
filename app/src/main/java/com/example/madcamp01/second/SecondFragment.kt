@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.R
 import com.example.madcamp01.DB.AppDatabase
 import com.example.madcamp01.DB.Entities.Image
+import com.example.madcamp01.DB.Entities.Review
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
