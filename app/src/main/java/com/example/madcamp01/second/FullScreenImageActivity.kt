@@ -45,7 +45,8 @@ class FullScreenImageActivity : AppCompatActivity() {
                     reviewRecyclerView.adapter = reviewAdapter
 
                     // 이미지를 표시
-                    fullScreenImageView.setImageURI(Uri.parse(image.toString()))
+                    val imageUri = Uri.parse(image.imageSrc.toString()) // image 객체에서 URI 추출
+                    fullScreenImageView.setImageURI(imageUri)
                 }
             }
         }
