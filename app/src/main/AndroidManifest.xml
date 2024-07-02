@@ -7,17 +7,18 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
-    <!-- 인터넷 사용 권한 설정-->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <meta-data
         android:name="com.kakao.sdk.AppKey"
-        android:value="83d9e79df60833ffcbdfbb09199697b8"/>
+        android:value="83d9e79df60833ffcbdfbb09199697b8" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,9 +27,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Madcamp01.AppCompat"
-        tools:targetApi="31"
         android:usesCleartextTraffic="true"
-        android:name=".GlobalApplication">
+        tools:targetApi="31">
+        <activity
+            android:name=".third.LabelTransformActivity"
+            android:exported="false" />
         <activity
             android:name=".AddReviewActivity"
             android:exported="false" />
@@ -49,8 +52,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -70,7 +74,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="d46a37ed9a48a8af47b08b5f5a338bb4"/>
+            android:value="d46a37ed9a48a8af47b08b5f5a338bb4" />
     </application>
 
 </manifest>

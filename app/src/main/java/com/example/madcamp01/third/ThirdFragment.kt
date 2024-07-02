@@ -1,6 +1,7 @@
 package com.example.madcamp01.third
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.madcamp01.DB.AppDatabase
 import com.example.madcamp01.DB.Entities.Place
+import com.example.madcamp01.DB.Entities.Review
 import com.example.madcamp01.R
 import com.kakao.vectormap.*
-import com.kakao.vectormap.camera.CameraPosition
 import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelManager
 import com.kakao.vectormap.label.LabelOptions
@@ -64,6 +65,38 @@ class ThirdFragment : Fragment() {
                     }
                     loadPlaces(database)
                 }
+
+                // 라벨 클릭 리스너 설정
+                kakaoMap.setOnLabelClickListener { kakaoMap, layer, label ->
+                    val labelPosition = label.getPosition()
+                    val latitude = labelPosition.latitude
+                    val longitude = labelPosition.longitude
+
+                    lifecycleScope.launch {
+                        val database = AppDatabase.getInstance(requireContext())
+
+                        // Find Place based on latitude and longitude
+                        val place = withContext(Dispatchers.IO) {
+                            database.placeDao().getPlaceByLocation(latitude, longitude)
+                        }
+
+                        if (place != null) {
+
+                            // Retrieve reviews for the identified place
+                            val reviews = withContext(Dispatchers.IO) {
+                                database.reviewDao().getReviewsByPlaceId(place.placeId)
+                            }
+
+                            // Display reviews in some way (e.g., log or update UI)
+                            reviews.forEach { review ->
+                                Log.d("Review", "Review ID: ${review.reviewId}, Rating: ${review.rating}, Comment: ${review.comment}")
+                                // Update UI with reviews
+                            }
+                        } else {
+                            Log.d("LabelClick", "No place found at this location")
+                        }
+                    }
+                }
             }
         })
 
@@ -87,7 +120,7 @@ class ThirdFragment : Fragment() {
 
     private suspend fun getPlacesFromDb(database: AppDatabase): List<Place> {
         return withContext(Dispatchers.IO) {
-            database.placeDao().getAllPlaces() // getAllPlaces 메소드가 DAO에 구현되어 있어야 합니다.
+            database.placeDao().getAllPlaces()
         }
     }
 
@@ -102,7 +135,7 @@ class ThirdFragment : Fragment() {
         if (places.isNotEmpty()) {
             val firstPlace = places.first()
             val initialPosition = LatLng.from(firstPlace.latitude, firstPlace.longitude)
-            kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 12))
+            kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
         }
     }
 }

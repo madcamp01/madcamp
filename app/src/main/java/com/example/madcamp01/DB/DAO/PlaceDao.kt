@@ -22,4 +22,7 @@ interface PlaceDao {
 
     @Query("SELECT * FROM Place")
     suspend fun getAllPlaces(): List<Place>
+
+    @Query("SELECT * FROM Place WHERE latitude = :latitude AND longitude = :longitude LIMIT 1")
+    suspend fun getPlaceByLocation(latitude: Double, longitude: Double): Place?
 }
