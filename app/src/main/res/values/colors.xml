@@ -7,9 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#009688</color> <!-- 청록색 계열 -->
-    <color name="colorPrimaryDark">#00796B</color> <!-- 어두운 청록색 -->
-    <color name="colorAccent">#4DB6AC</color> <!-- 밝은 청록색 -->
-    <color name="colorPrimaryLight">#B2DFDB</color> <!-- 아주 밝은 청록색 -->
-    <color name="colorBackground">#E0F2F1</color> <!-- 청록색 배경 -->
+    <color name="colorPrimary">#6A2E1B</color> <!-- 갈색 계열 -->
+    <color name="colorPrimaryDark">#F5D666</color> <!-- 어두운 갈색 -->
+    <color name="colorAccent">#F5D666</color> <!-- 밝은 갈색 -->
+    <color name="colorPrimaryLight">#F5D666</color> <!-- 아주 밝은 청록색 -->
+    <color name="colorBackground">#F5D666</color> <!-- 노란색 배경 -->
 </resources>
