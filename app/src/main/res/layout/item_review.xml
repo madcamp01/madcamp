@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
         android:padding="50dp"
         android:background="?attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
-        android:radius="20dp">
+        android:radius="20dp" android:layout_marginBottom="10dp">
 
         <ImageView
             android:id="@+id/profilePictureImageView"
@@ -22,11 +22,15 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/ratingTextView"
+    <RatingBar
+        android:id="@+id/reviewRate"
+        style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold" />
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="1" />
 
     <TextView
         android:id="@+id/commentTextView"

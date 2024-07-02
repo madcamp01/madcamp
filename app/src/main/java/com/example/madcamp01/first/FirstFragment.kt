@@ -63,6 +63,7 @@ class FirstFragment : Fragment() {
                 contactAdapter = ContactAdapter(contacts) { contact ->
                     val intent = Intent(context, ContactDetailActivity::class.java).apply {
                         putExtra("CONTACT_ID", contact.personId)
+                        putExtra("CONTACT_NAME", contact.personName)
                     }
                     startActivityForResult(intent, REQUEST_CODE)
                 }

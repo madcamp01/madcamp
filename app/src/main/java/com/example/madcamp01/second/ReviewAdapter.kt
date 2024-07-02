@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.ContactDetailActivity
@@ -22,7 +23,7 @@ import kotlinx.coroutines.withContext
 class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
     class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ratingTextView: TextView = itemView.findViewById(R.id.ratingTextView)
+        val ratingBar: RatingBar = itemView.findViewById(R.id.reviewRate)
         val commentTextView: TextView = itemView.findViewById(R.id.commentTextView)
         val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
         val profilePictureImageView: ImageView = itemView.findViewById(R.id.profilePictureImageView)
@@ -34,7 +35,7 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
                     contactDao.getContactByPersonId(review.personId)
                 }
                 profilePictureImageView.setImageURI(contact.profilePicture)
-                ratingTextView.text = "Rating: ${review.rating}"
+                ratingBar.rating = review.rating.toFloat()
                 commentTextView.text = review.comment
                 dateTextView.text = review.date
 
@@ -46,9 +47,9 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
                     context.startActivity(intent)
                 }
 
-                Log.d("adapter", review.rating.toString())
-                Log.d("adapter", review.comment)
-                Log.d("adapter", review.date)
+//                Log.d("adapter", review.rating.toString())
+//                Log.d("adapter", review.comment)
+//                Log.d("adapter", review.date)
             }
         }
     }
