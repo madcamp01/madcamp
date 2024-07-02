@@ -34,4 +34,7 @@ interface ReviewDao {
 
     @Query("SELECT personId FROM Review WHERE reviewId = :reviewId")
     suspend fun getPersonIdByReviewId(reviewId: Int): Int?
+
+    @Query("SELECT * FROM Review WHERE placeId = :placeId")
+    suspend fun getReviewsByPlaceId(placeId: Int): List<Review>
 }
