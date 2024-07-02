@@ -55,7 +55,8 @@ class FirstFragment : Fragment() {
     private fun loadContacts() {
         val database = AppDatabase.getInstance(requireContext())
         lifecycleScope.launch {
-            val contacts = getContactsFromDb(database)
+            val contacts = getContactsFromDb(database).filter{it.personId!=1}.sortedBy { it.personName }
+
             if (contacts.isEmpty()) {
                 insertDummyData(database)
                 loadContacts() // Dummy data 삽입 후 다시 로드
