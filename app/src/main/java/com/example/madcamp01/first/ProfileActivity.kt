@@ -294,7 +294,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun loadReviews() {
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getInstance(applicationContext)
-            val reviews = database.reviewDao().getReviewsByContactId(contactId)
+            val reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
 
             withContext(Dispatchers.Main) {
                 reviewRecyclerView.adapter = ReviewAdapterProfile(reviews, ::deleteReview, isReviewEditMode)

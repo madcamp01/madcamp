@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.madcamp01.DB.Entities.Image
+import com.example.madcamp01.DB.Entities.Review
 
 @Dao
 interface ImageDao {
@@ -18,4 +19,5 @@ interface ImageDao {
 
     @Query("SELECT * FROM Image WHERE imageId = :imageId")
     suspend fun getImageById(imageId: Int): Image?
+
 }

@@ -30,10 +30,12 @@ class ContactDetailActivity : AppCompatActivity() {
     private lateinit var buttonEdit: Button
     private lateinit var deleteButton: Button
     private lateinit var reviewRecyclerView: RecyclerView
+    private lateinit var reviewListText:TextView
 
     private var contactId: Int = -1
     private lateinit var contact: Contact
     private var isEditMode: Boolean = false
+    private var contactName:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +51,12 @@ class ContactDetailActivity : AppCompatActivity() {
         buttonEdit = findViewById(R.id.buttonEdit)
         deleteButton = findViewById(R.id.deleteButton)
         reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
+        reviewListText = findViewById(R.id.ReviewListText)
 
         reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
         contactId = intent.getIntExtra("CONTACT_ID", -1)
+        contactName = intent.getStringExtra("CONTACT_NAME").toString()
 
         loadContact()
         loadReviews()
@@ -79,6 +83,7 @@ class ContactDetailActivity : AppCompatActivity() {
                 textName.text = contact.personName
                 textPhoneNumber.text = contact.contactInfo
                 textStatus.text = contact.memo
+                reviewListText.text = "${contactName} 님의 리뷰 목록입니다."
             }
         }
     }
@@ -154,11 +159,11 @@ class ContactDetailActivity : AppCompatActivity() {
     private fun loadReviews() {
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getInstance(applicationContext)
-            var reviews = database.reviewDao().getReviewsByContactId(contactId)
+            var reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
 
             if(reviews.isEmpty()){
                 insertDummyData(database)
-                reviews = database.reviewDao().getReviewsByContactId(contactId)
+                reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
             }
             withContext(Dispatchers.Main) {
                 // RecyclerView 설정 및 리뷰 데이터 표시 코드 추가
