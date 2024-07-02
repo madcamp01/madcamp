@@ -1,6 +1,5 @@
 package com.example.madcamp01.third
 
-import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.madcamp01.DB.AppDatabase
 import com.example.madcamp01.DB.Entities.Place
+import com.example.madcamp01.DB.Entities.Review
 import com.example.madcamp01.R
 import com.kakao.vectormap.*
 import com.kakao.vectormap.camera.CameraUpdateFactory
@@ -66,9 +66,36 @@ class ThirdFragment : Fragment() {
                     loadPlaces(database)
                 }
 
-                // 맵 클릭 리스너 설정
-                kakaoMap.setOnMapClickListener { map, position, screenPoint, poi ->
-                    Log.d("MapClick", "Lat: ${position.latitude}, Lng: ${position.longitude}")
+                // 라벨 클릭 리스너 설정
+                kakaoMap.setOnLabelClickListener { kakaoMap, layer, label ->
+                    val labelPosition = label.getPosition()
+                    val latitude = labelPosition.latitude
+                    val longitude = labelPosition.longitude
+
+                    lifecycleScope.launch {
+                        val database = AppDatabase.getInstance(requireContext())
+
+                        // Find Place based on latitude and longitude
+                        val place = withContext(Dispatchers.IO) {
+                            database.placeDao().getPlaceByLocation(latitude, longitude)
+                        }
+
+                        if (place != null) {
+
+                            // Retrieve reviews for the identified place
+                            val reviews = withContext(Dispatchers.IO) {
+                                database.reviewDao().getReviewsByPlaceId(place.placeId)
+                            }
+
+                            // Display reviews in some way (e.g., log or update UI)
+                            reviews.forEach { review ->
+                                Log.d("Review", "Review ID: ${review.reviewId}, Rating: ${review.rating}, Comment: ${review.comment}")
+                                // Update UI with reviews
+                            }
+                        } else {
+                            Log.d("LabelClick", "No place found at this location")
+                        }
+                    }
                 }
             }
         })
