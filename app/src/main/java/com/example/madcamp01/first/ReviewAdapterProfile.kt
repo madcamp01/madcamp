@@ -1,5 +1,6 @@
 package com.example.madcamp01.first
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,12 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp01.DB.AppDatabase
 import com.example.madcamp01.R
 import com.example.madcamp01.DB.Entities.Review
+import com.example.madcamp01.second.FullScreenImageActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -65,6 +68,7 @@ class ReviewAdapterProfile(
         private val reviewDate: TextView = itemView.findViewById(R.id.dateTextView)
         val selectCheckBox: CheckBox = itemView.findViewById(R.id.select_checkbox)
         private val reviewImage: ImageView = itemView.findViewById(R.id.reviewPictureImageView)
+        private val profileReviewLayout: ConstraintLayout = itemView.findViewById(R.id.ProfileReviewLayout)
 
         fun bind(review: Review) {
             reviewComment.text = review.comment
@@ -75,6 +79,14 @@ class ReviewAdapterProfile(
                     AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc
                 }
                 reviewImage.setImageURI(imageUri)
+            }
+
+            profileReviewLayout.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, FullScreenImageActivity::class.java).apply {
+                    putExtra("IMAGE_ID", review.imageId)
+                }
+                context.startActivity(intent)
             }
         }
     }

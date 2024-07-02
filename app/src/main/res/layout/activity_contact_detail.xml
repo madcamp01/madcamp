@@ -14,19 +14,21 @@
 
         <Button
             android:id="@+id/buttonEdit"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="편집" />
+            android:text="편집"
+            android:background="@drawable/circular_image"
+            />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="153dp"
-        android:layout_height="145dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/circular_image"
         android:contentDescription="@string/image_desc"
         android:scaleType="centerCrop"
@@ -69,14 +71,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="010-1234-5678"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextPhoneNumber"
                 android:hint="휴대전화"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="7dp"
                 android:visibility="gone" />
@@ -87,23 +89,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="직업"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"/>
         <EditText
             android:id="@+id/editTextStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="직업"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="7dp"
+            android:textSize="15sp"
             android:visibility="gone" />
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:text="삭제"
-            android:visibility="gone"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:background="@color/white"/>
     </LinearLayout>
     <TextView
         android:id="@+id/ReviewListText"
