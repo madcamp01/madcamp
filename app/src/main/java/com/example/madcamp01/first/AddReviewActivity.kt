@@ -108,17 +108,12 @@ class AddReviewActivity : AppCompatActivity() {
     }
 
     private suspend fun insertPlace(database: AppDatabase, placeName: String): Int {
-        val placeLocation = generateRandomLocationInKorea()
-        val place = Place(0, placeName, placeLocation)
+        val lat = 33.0 + Random.nextDouble(5.0) // 위도: 33.0 ~ 38.0
+        val lon = 125.0 + Random.nextDouble(8.0) // 경도: 125.0 ~ 132.0
+        val place = Place(0, placeName, lat, lon)
         return withContext(Dispatchers.IO) {
             database.placeDao().insertPlace(place).toInt()
         }
-    }
-
-    private fun generateRandomLocationInKorea(): String {
-        val lat = 33.0 + Random.nextDouble(5.0) // 위도: 33.0 ~ 38.0
-        val lon = 125.0 + Random.nextDouble(8.0) // 경도: 125.0 ~ 132.0
-        return "$lat,$lon"
     }
 
     private suspend fun getImageId(database: AppDatabase, imageUri: Uri): Int? {

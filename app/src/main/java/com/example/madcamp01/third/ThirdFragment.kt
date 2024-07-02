@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.madcamp01.DB.AppDatabase
+import com.example.madcamp01.DB.Entities.Place
 import com.example.madcamp01.R
 import com.kakao.vectormap.*
 import com.kakao.vectormap.camera.CameraPosition
@@ -14,6 +17,9 @@ import com.kakao.vectormap.label.LabelManager
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelStyles
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ThirdFragment : Fragment() {
     private var mapView: MapView? = null
@@ -36,6 +42,7 @@ class ThirdFragment : Fragment() {
 
         // MapView 객체 생성
         mapView = view.findViewById(R.id.map_view)
+        tvMapViewLatLng = view.findViewById(R.id.tv_map_view_latlng)
 
         mapView?.start(object : MapLifeCycleCallback() {
             override fun onMapDestroy() {
@@ -50,39 +57,53 @@ class ThirdFragment : Fragment() {
                 kakaoMap = map
                 labelManager = kakaoMap.labelManager!!
 
-                // 특정 좌표 설정 (예: 대전역)
-                val markerPoint = LatLng.from(36.3319, 127.4346)
-
-                // 라벨 스타일 설정
-                val labelStyle = LabelStyles.from("defaultStyle", LabelStyle.from(R.drawable.marker2))
-
-                // 라벨 추가
-                labelManager.layer?.addLabel(LabelOptions.from("label", markerPoint).setStyles(labelStyle))
-
-                // 특정 위치로 맵 이동
-                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(markerPoint, 15))
-
-                // Update latitude and longitude text
-                updateLatLngText()
-
-                // 카메라 이동 완료 리스너 설정
-                kakaoMap.setOnCameraMoveEndListener(object : KakaoMap.OnCameraMoveEndListener {
-                    override fun onCameraMoveEnd(kakaoMap: KakaoMap, cameraPosition: CameraPosition, gestureType: GestureType) {
-                        updateLatLngText()
+                lifecycleScope.launch {
+                    val database = AppDatabase.getInstance(requireContext())
+                    val places = getPlacesFromDb(database)
+                    if (places.isEmpty()) {
+                        insertDummyData(database)
                     }
-                })
+                    loadPlaces(database)
+                }
             }
         })
 
         return view
     }
 
-    private fun updateLatLngText() {
-        val viewport = kakaoMap.viewport
-        val x = viewport.width() / 2
-        val y = viewport.height() / 2
+    private suspend fun insertDummyData(database: AppDatabase) {
+        val places = listOf(
+            Place(1, "KAIST Main Gate", 36.3726, 127.3605),
+            Place(2, "Expo Science Park", 36.3741, 127.3864),
+            Place(3, "Hanbat Arboretum", 36.3664, 127.3889),
+            Place(4, "Daejeon Museum of Art", 36.3705, 127.3850),
+            Place(5, "Gyejoksan Mountain Red Clay Trail", 36.3956, 127.3725)
+        )
+        withContext(Dispatchers.IO) {
+            database.placeDao().apply {
+                places.forEach { insertPlace(it) }
+            }
+        }
+    }
 
-        val centerPosition = kakaoMap.fromScreenPoint(x, y)
-        tvMapViewLatLng.text = "Lat = ${centerPosition?.latitude}\nLng = ${centerPosition?.longitude}"
+    private suspend fun getPlacesFromDb(database: AppDatabase): List<Place> {
+        return withContext(Dispatchers.IO) {
+            database.placeDao().getAllPlaces() // getAllPlaces 메소드가 DAO에 구현되어 있어야 합니다.
+        }
+    }
+
+    private suspend fun loadPlaces(database: AppDatabase) {
+        val places = getPlacesFromDb(database)
+        places.forEach { place ->
+            val markerPoint = LatLng.from(place.latitude, place.longitude)
+            val labelStyle = LabelStyles.from("defaultStyle", LabelStyle.from(R.drawable.marker2))
+            labelManager.layer?.addLabel(LabelOptions.from(place.placeName, markerPoint).setStyles(labelStyle))
+        }
+
+        if (places.isNotEmpty()) {
+            val firstPlace = places.first()
+            val initialPosition = LatLng.from(firstPlace.latitude, firstPlace.longitude)
+            kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 12))
+        }
     }
 }
