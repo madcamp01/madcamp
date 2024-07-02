@@ -69,30 +69,30 @@ class GlobalApplication : Application() {
     }
     private suspend fun insertDummyImages(database: AppDatabase) {
         val dummyImages = listOf(
-            Image(1, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img1)),
-            Image(2, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img1)),
-            Image(3, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img3)),
-            Image(4, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img4)),
-            Image(5, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img5)),
-            Image(6, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img6)),
-            Image(7, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img7)),
-            Image(8, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img8)),
-            Image(9, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img9)),
-            Image(10, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img10)),
-            Image(11, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img11)),
-            Image(12, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img12)),
-            Image(13, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img13)),
-            Image(14, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img14)),
-            Image(15, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img15)),
-            Image(16, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img16)),
-            Image(17, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img17)),
-            Image(18, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img18)),
-            Image(19, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img19)),
-            Image(20, Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img20))
+            Image(1, "android.resource://com.example.madcamp01/" + R.drawable.img1),
+            Image(2, "android.resource://com.example.madcamp01/" + R.drawable.img2),
+            Image(3, "android.resource://com.example.madcamp01/" + R.drawable.img3),
+            Image(4, "android.resource://com.example.madcamp01/" + R.drawable.img4),
+            Image(5, "android.resource://com.example.madcamp01/" + R.drawable.img5),
+            Image(6, "android.resource://com.example.madcamp01/" + R.drawable.img6),
+            Image(7, "android.resource://com.example.madcamp01/" + R.drawable.img7),
+            Image(8, "android.resource://com.example.madcamp01/" + R.drawable.img8),
+            Image(9, "android.resource://com.example.madcamp01/" + R.drawable.img9),
+            Image(10, "android.resource://com.example.madcamp01/" + R.drawable.img10),
+            Image(11, "android.resource://com.example.madcamp01/" + R.drawable.img11),
+            Image(12, "android.resource://com.example.madcamp01/" + R.drawable.img12),
+            Image(13, "android.resource://com.example.madcamp01/" + R.drawable.img13),
+            Image(14, "android.resource://com.example.madcamp01/" + R.drawable.img14),
+            Image(15, "android.resource://com.example.madcamp01/" + R.drawable.img15),
+            Image(16, "android.resource://com.example.madcamp01/" + R.drawable.img16),
+            Image(17, "android.resource://com.example.madcamp01/" + R.drawable.img17),
+            Image(18, "android.resource://com.example.madcamp01/" + R.drawable.img18),
+            Image(19, "android.resource://com.example.madcamp01/" + R.drawable.img19),
+            Image(20, "android.resource://com.example.madcamp01/" + R.drawable.img20)
         )
         val existingImages = database.imageDao().getAllImages()
         if (existingImages.isEmpty()) {
-            existingImages.forEach { database.imageDao().insertImage(it) }
+            dummyImages.forEach { database.imageDao().insertImage(it) }
         }
     }
     private suspend fun insertDummyPlaces(database: AppDatabase) {
