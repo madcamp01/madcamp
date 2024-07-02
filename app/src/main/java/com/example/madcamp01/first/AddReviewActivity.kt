@@ -2,6 +2,7 @@ package com.example.madcamp01
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -81,6 +82,7 @@ class AddReviewActivity : AppCompatActivity() {
             if (imageId == null) {
                 imageId = insertImage(database, selectedImageUri!!)
             }
+            Log.d("addreview","${placeId}+${imageId}+${selectedImageUri}")
 
             val review = Review(
                 reviewId = 0,
@@ -121,7 +123,7 @@ class AddReviewActivity : AppCompatActivity() {
 
     private suspend fun getImageId(database: AppDatabase, imageUri: Uri): Int? {
         return withContext(Dispatchers.IO) {
-            database.imageDao().getImageByUri(imageUri.toString())?.imageId
+            database.imageDao().getImageByUri(imageUri)?.imageId
         }
     }
 

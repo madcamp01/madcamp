@@ -19,7 +19,7 @@ class DataRepository(
     }
 
     suspend fun getImageByUri(imageUri: Uri): Image? {
-        return imageDao.getImageByUri(imageUri.toString())
+        return imageDao.getImageByUri(imageUri)
     }
 
     suspend fun getReviewsByImageId(imageId: Int): List<Review> {
@@ -32,10 +32,6 @@ class DataRepository(
 
     suspend fun insertImage(image: Image) {
         imageDao.insertImage(image)
-    }
-
-    suspend fun getImageByUri(uri: String): Image? {
-        return imageDao.getImageByUri(uri)
     }
 
     suspend fun getReviewsForImage(imageId: Int): List<Review> {
