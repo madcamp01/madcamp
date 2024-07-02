@@ -3,6 +3,7 @@ package com.example.madcamp01.second
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -56,7 +57,8 @@ class FullScreenImageActivity : AppCompatActivity() {
                     }
 
                     // 이미지를 표시
-                    val imageUri = Uri.parse(image.imageSrc.toString()) // image 객체에서 URI 추출
+                    val imageUri = image.imageSrc // image 객체에서 URI 추출
+                    Log.d("addreview", "$imageUri")
                     fullScreenImageView.setImageURI(imageUri)
                 }
             }
