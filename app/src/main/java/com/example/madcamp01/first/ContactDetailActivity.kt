@@ -161,9 +161,10 @@ class ContactDetailActivity : AppCompatActivity() {
             val database = AppDatabase.getInstance(applicationContext)
             var reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
 
-            if(reviews.isEmpty()){
+            if(reviews.isEmpty()) {
                 insertDummyData(database)
-                reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
+                reviews = database.reviewDao().getReviewsByContactId(contactId)
+                    .sortedByDescending { it.date }
             }
             withContext(Dispatchers.Main) {
                 // RecyclerView 설정 및 리뷰 데이터 표시 코드 추가
@@ -172,7 +173,7 @@ class ContactDetailActivity : AppCompatActivity() {
             }
         }
     }
-    //tobedeleted
+//    //tobedeleted
     private suspend fun insertDummyData(database: AppDatabase) {
         val dummyReviews = listOf(
             Review(1, 1, 1, 1, 4, "Great place!", "2023-06-01"),

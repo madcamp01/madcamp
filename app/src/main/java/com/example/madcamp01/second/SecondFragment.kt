@@ -34,8 +34,10 @@ class SecondFragment : Fragment() {
         val database = AppDatabase.getInstance(requireContext())
 
         lifecycleScope.launch {
-            val imagesWithReviews = getImagesWithReviewsFromDb(database)
-            if (imagesWithReviews.isEmpty()) {
+//            val imagesWithReviews = getImagesWithReviewsFromDb(database)
+            val images = database.imageDao().getAllImages()
+            val reviews = database.reviewDao().getAllReviews()
+            if (images.isEmpty() || reviews.isEmpty()) {
                 insertDummyData(database)
             }
             loadImages()

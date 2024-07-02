@@ -66,7 +66,7 @@
         <activity
             android:name=".ViewPagerAdapter"
             android:exported="false" />
-        <activity android:name=".second.ImageFullscreenActivity" />
+
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
