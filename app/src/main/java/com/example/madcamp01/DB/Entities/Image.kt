@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 @Entity
 data class Image(
     @PrimaryKey(autoGenerate = true) val imageId: Int,
-    val imageSrc: Uri
+    val imageSrc: String
 )

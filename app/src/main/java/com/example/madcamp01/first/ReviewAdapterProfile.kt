@@ -1,6 +1,7 @@
 package com.example.madcamp01.first
 
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,22 +70,24 @@ class ReviewAdapterProfile(
         val selectCheckBox: CheckBox = itemView.findViewById(R.id.select_checkbox)
         private val reviewImage: ImageView = itemView.findViewById(R.id.reviewPictureImageView)
         private val profileReviewLayout: ConstraintLayout = itemView.findViewById(R.id.ProfileReviewLayout)
-
+        var imageUri:String = ""
         fun bind(review: Review) {
             reviewComment.text = review.comment
             reviewRating.rating = review.rating.toFloat()
             reviewDate.text = review.date
             GlobalScope.launch(Dispatchers.Main) {
-                val imageUri = withContext(Dispatchers.IO) {
+                imageUri = withContext(Dispatchers.IO) {
                     AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc
                 }
-                reviewImage.setImageURI(imageUri)
+                reviewImage.setImageURI(Uri.parse(imageUri))
             }
 
             profileReviewLayout.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, FullScreenImageActivity::class.java).apply {
                     putExtra("IMAGE_ID", review.imageId)
+                    putExtra("IMAGE_URI",imageUri)
+                    putExtra("REVIEW_ID",review.reviewId)
                 }
                 context.startActivity(intent)
             }

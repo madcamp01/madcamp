@@ -2,14 +2,18 @@ package com.example.madcamp01
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentUris
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,8 +58,17 @@ class ProfileActivity : AppCompatActivity() {
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             selectedImageUri = it
+            Log.d("permission","pickImage:$selectedImageUri")
+
             imageView.setImageURI(it)
-        }
+
+            try {
+                contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                Log.d("permission", "fuckedUP")
+            } catch (e: SecurityException) {
+                e.printStackTrace()
+            }
+    }
     }
 
     private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
@@ -147,6 +160,7 @@ class ProfileActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 pickImage.launch("image/*")
+                Log.d("permission","$selectedImageUri")
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
             }
@@ -154,6 +168,7 @@ class ProfileActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 pickImage.launch("image/*")
+                Log.d("permission","$selectedImageUri")
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
             }
@@ -161,8 +176,12 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+        Log.d("permission","takePhoto: $selectedImageUri")
+
         val photoUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, ContentValues())!!
         selectedImageUri = photoUri
+        Log.d("permission","takePhoto: $selectedImageUri")
+
         takePhoto.launch(photoUri)
     }
 
@@ -179,6 +198,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             STORAGE_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
                     pickImage.launch("image/*")
                 } else {
                     Toast.makeText(this, "스토리지 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
@@ -263,7 +283,7 @@ class ProfileActivity : AppCompatActivity() {
             personName = editTextName.text.toString(),
             contactInfo = editTextPhoneNumber.text.toString(),
             memo = editTextStatus.text.toString(),
-            profilePicture = selectedImageUri ?: contact.profilePicture
+            profilePicture = selectedImageUri?.let { getRealPathFromURI(this, it) }?.let { Uri.parse(it) } ?: contact.profilePicture
         )
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -278,7 +298,31 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+    fun getRealPathFromURI(context: Context, uri: Uri): String? {
+        if (DocumentsContract.isDocumentUri(context, uri)) {
+            if ("com.android.providers.media.documents" == uri.authority) {
+                val documentId = DocumentsContract.getDocumentId(uri)
+                val id = documentId.split(":")[1]
+                val contentUri = ContentUris.withAppendedId(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id.toLong()
+                )
+                return getDataColumn(context, contentUri, null, null)
+            }
+        } else if ("content".equals(uri.scheme, ignoreCase = true)) {
+            return getDataColumn(context, uri, null, null)
+        }
+        return null
+    }
 
+    fun getDataColumn(context: Context, uri: Uri, selection: String?, selectionArgs: Array<String>?): String? {
+        context.contentResolver.query(uri, arrayOf(MediaStore.Images.Media.DATA), selection, selectionArgs, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                return cursor.getString(columnIndex)
+            }
+        }
+        return null
+    }
 //    private fun deleteContact() {
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val database = AppDatabase.getInstance(applicationContext)
