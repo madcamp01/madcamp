@@ -42,7 +42,6 @@ class ThirdFragment : Fragment() {
 
         // MapView 객체 생성
         mapView = view.findViewById(R.id.map_view)
-        tvMapViewLatLng = view.findViewById(R.id.tv_map_view_latlng)
 
         mapView?.start(object : MapLifeCycleCallback() {
             override fun onMapDestroy() {
