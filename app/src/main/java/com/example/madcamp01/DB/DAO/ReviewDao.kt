@@ -5,6 +5,9 @@ import com.example.madcamp01.DB.Entities.Review
 
 @Dao
 interface ReviewDao {
+    @Query("SELECT * FROM Review")
+    suspend fun getAllReviews():List<Review>
+
     @Insert
     suspend fun insertReview(review: Review)
 
