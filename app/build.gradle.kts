@@ -83,5 +83,5 @@ dependencies {
     implementation(libs.fragment.ktx)
     kapt(libs.androidx.room.compiler)
     implementation ("com.kakao.maps.open:android:2.9.7")
-    //implementation("com.kakao.sdk:vectormap:2.8.6")
+    implementation("com.google.code.gson:gson:2.8.6")
 }
