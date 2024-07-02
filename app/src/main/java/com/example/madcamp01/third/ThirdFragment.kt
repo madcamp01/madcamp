@@ -54,13 +54,13 @@ class ThirdFragment : Fragment() {
                 val markerPoint = LatLng.from(36.3319, 127.4346)
 
                 // 라벨 스타일 설정
-                val labelStyle = LabelStyles.from("defaultStyle", LabelStyle.from(R.drawable.sample_square_image))
+                val labelStyle = LabelStyles.from("defaultStyle", LabelStyle.from(R.drawable.marker2))
 
                 // 라벨 추가
                 labelManager.layer?.addLabel(LabelOptions.from("label", markerPoint).setStyles(labelStyle))
 
                 // 특정 위치로 맵 이동
-                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(markerPoint, 20))
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(markerPoint, 15))
 
                 // Update latitude and longitude text
                 updateLatLngText()
