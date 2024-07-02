@@ -34,12 +34,13 @@ class SecondFragment : Fragment() {
         val database = AppDatabase.getInstance(requireContext())
 
         lifecycleScope.launch {
-            val images = getImagesFromDb(database)
-            if (images.isEmpty()) {
+            val imagesWithReviews = getImagesWithReviewsFromDb(database)
+            if (imagesWithReviews.isEmpty()) {
                 insertDummyData(database)
             }
             loadImages()
         }
+
 
         return view
     }
@@ -77,11 +78,12 @@ class SecondFragment : Fragment() {
     private fun loadImages() {
         val database = AppDatabase.getInstance(requireContext())
         lifecycleScope.launch {
-            val images = getImagesFromDb(database)
-            imageAdapter = ImageAdapter(images) { imageUri, imageId ->
+            val imagesWithReviews = getImagesWithReviewsFromDb(database)
+            imageAdapter = ImageAdapter(imagesWithReviews) { imageUri, imageId, review ->
                 val intent = Intent(context, FullScreenImageActivity::class.java).apply {
-                    putExtra("IMAGE_URI", imageUri)
+                    putExtra("IMAGE_URI", imageUri.toString())
                     putExtra("IMAGE_ID", imageId)
+                    putExtra("REVIEW", review)
                 }
                 startActivity(intent)
             }
@@ -89,9 +91,14 @@ class SecondFragment : Fragment() {
         }
     }
 
-    private suspend fun getImagesFromDb(database: AppDatabase): List<Image> {
+    private suspend fun getImagesWithReviewsFromDb(database: AppDatabase): List<Pair<Image, Review?>> {
         return withContext(Dispatchers.IO) {
-            database.imageDao().getAllImages()
+            val images = database.imageDao().getAllImages()
+            val reviews = database.reviewDao().getAllReviews()
+            images.map { image ->
+                val review = reviews.find { it.imageId == image.imageId }
+                image to review
+            }
         }
     }
 }
