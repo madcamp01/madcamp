@@ -5,7 +5,7 @@ https://drive.google.com/file/d/1Zt-7SeBwh1BnDQkHgTd2umhVuQHm4eA-/view?usp=drive
 
 ---
 
-![Frame 3 (1).png](WEWE%20cbe8c208c87f4531955a158f31b0a023/Frame_3_(1).png)
+![Frame_3_(1)](https://github.com/madcamp01/madcamp/assets/70465226/929e4006-0034-46b3-8f18-eb14c5926e83)
 
 WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니다.
 
