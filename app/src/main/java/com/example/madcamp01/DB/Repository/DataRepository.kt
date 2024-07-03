@@ -14,11 +14,11 @@ class DataRepository(
     private val reviewDao: ReviewDao // 여기에 인스턴스 변수로 선언
 ) {
 
-    suspend fun getContactByProfilePicture(imageUri: Uri): Contact? {
-        return contactDao.getContactByProfilePicture(imageUri)
+    suspend fun getContactByProfilePicture(imageUri: String): Contact? {
+        return contactDao.getContactByProfilePicture(Uri.parse(imageUri))
     }
 
-    suspend fun getImageByUri(imageUri: Uri): Image? {
+    suspend fun getImageByUri(imageUri: String): Image? {
         return imageDao.getImageByUri(imageUri)
     }
 

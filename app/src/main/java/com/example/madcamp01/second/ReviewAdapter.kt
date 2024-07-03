@@ -20,7 +20,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
+class ReviewAdapter(private val review: Review) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
     class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ratingBar: RatingBar = itemView.findViewById(R.id.reviewRate)
@@ -29,7 +29,6 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
         val profilePictureImageView: ImageView = itemView.findViewById(R.id.profilePictureImageView)
 
         fun bind(contactDao: ContactDao, review: Review) {
-            // 비동기로 데이터를 로드하고 UI를 설정
             GlobalScope.launch(Dispatchers.Main) {
                 val contact = withContext(Dispatchers.IO) {
                     contactDao.getContactByPersonId(review.personId)
@@ -43,27 +42,23 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
                     val context = itemView.context
                     val intent = Intent(context, ContactDetailActivity::class.java).apply {
                         putExtra("CONTACT_ID", contact.personId)
+                        putExtra("CONTACT_NAME",contact.personName)
                     }
                     context.startActivity(intent)
                 }
-
-//                Log.d("adapter", review.rating.toString())
-//                Log.d("adapter", review.comment)
-//                Log.d("adapter", review.date)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_review, parent, false)
-        val database = AppDatabase.getInstance(parent.context)
         return ReviewViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val database = AppDatabase.getInstance(holder.itemView.context)
-        holder.bind(database.contactDao(), reviews[position])
+        holder.bind(database.contactDao(), review)
     }
 
-    override fun getItemCount(): Int = reviews.size
+    override fun getItemCount(): Int = 1
 }

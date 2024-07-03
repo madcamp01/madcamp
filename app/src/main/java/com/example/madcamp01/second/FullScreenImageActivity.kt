@@ -34,34 +34,15 @@ class FullScreenImageActivity : AppCompatActivity() {
         reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val imageId: Int = intent.getIntExtra("IMAGE_ID", -1)
+        val reviewId: Int = intent.getIntExtra("REVIEW_ID", -1)
+        val imageUri: String? = intent.getStringExtra("IMAGE_URI")
 
-        if (imageId != -1) {
-            val database = AppDatabase.getInstance(this)
-            val repository =
-                DataRepository(database.contactDao(), database.imageDao(), database.reviewDao())
-            lifecycleScope.launch {
-                val image = withContext(Dispatchers.IO) { repository.getImageById(imageId) }
-                if (image != null) {
-                    // 이미지를 가져왔으니 해당 이미지의 리뷰들을 가져옴
-                    val reviews =
-                        withContext(Dispatchers.IO) { repository.getReviewsByImageId(imageId) }
-                    reviewAdapter = ReviewAdapter(reviews)
-                    reviewRecyclerView.adapter = reviewAdapter
+        if (imageUri != null) {
+            fullScreenImageView.setImageURI(Uri.parse(imageUri))
+        }
 
-                    // 리뷰의 personId를 사용하여 Contact에서 profilePictureUri를 가져와 표시
-                    val firstReview = reviews.firstOrNull()
-                    if (firstReview != null) {
-                        val contact = database.contactDao().getContactByPersonId(firstReview.personId)
-                        val profilePictureUri = contact.profilePicture
-                        fullScreenImageView.setImageURI(profilePictureUri)
-                    }
-
-                    // 이미지를 표시
-                    val imageUri = image.imageSrc // image 객체에서 URI 추출
-                    Log.d("addreview", "$imageUri")
-                    fullScreenImageView.setImageURI(imageUri)
-                }
-            }
+        if (reviewId != -1) {
+            loadReview(reviewId)
         }
 
         supportActionBar?.hide()
@@ -70,4 +51,16 @@ class FullScreenImageActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun loadReview(reviewId: Int) {
+        val database = AppDatabase.getInstance(this)
+        lifecycleScope.launch {
+            val review = withContext(Dispatchers.IO) { database.reviewDao().getReviewById(reviewId) }
+            review?.let {
+                reviewAdapter = ReviewAdapter(it)
+                reviewRecyclerView.adapter = reviewAdapter
+            }
+        }
+    }
 }
+

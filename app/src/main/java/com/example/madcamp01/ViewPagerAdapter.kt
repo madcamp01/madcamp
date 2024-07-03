@@ -1,10 +1,10 @@
 package com.example.madcamp01
 
+import SecondFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.madcamp01.first.FirstFragment
-import com.example.madcamp01.second.SecondFragment
 import com.example.madcamp01.third.ThirdFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {

@@ -38,22 +38,25 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
         private val reviewRating: RatingBar = itemView.findViewById(R.id.reviewRate)
         private val reviewLayout: LinearLayout = itemView.findViewById(R.id.ReviewLayout)
         private val reviewPictureImageView: ImageView =itemView.findViewById(R.id.reviewPictureImageView)
+        var imageUri:String = ""
 
         fun bind(review: Review) {
             reviewText.text = review.comment
             reviewDate.text = review.date
             reviewRating.rating = review.rating.toFloat()
             GlobalScope.launch(Dispatchers.Main) {
-                val imageUri = withContext(Dispatchers.IO) {
+                imageUri = withContext(Dispatchers.IO) {
                     AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc
                 }
-                reviewPictureImageView.setImageURI(imageUri)
+                reviewPictureImageView.setImageURI(Uri.parse(imageUri))
             }
 
             reviewLayout.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, FullScreenImageActivity::class.java).apply {
                     putExtra("IMAGE_ID", review.imageId)
+                    putExtra("IMAGE_URI",imageUri)
+                    putExtra("REVIEW_ID",review.reviewId)
                 }
                 context.startActivity(intent)
             }

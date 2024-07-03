@@ -1,6 +1,7 @@
 // ImagePagerAdapter.kt
 package com.example.madcamp01.second
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ class ImagePagerAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image = images[position]
-        holder.imageView.setImageURI(image.imageSrc)
+        holder.imageView.setImageURI(Uri.parse(image.imageSrc))
     }
 
     override fun getItemCount(): Int = images.size

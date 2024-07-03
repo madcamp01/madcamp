@@ -12,7 +12,7 @@ import com.example.madcamp01.R
 
 class ImageAdapter(
     private val imagesWithReviews: List<Pair<Image, Review?>>,
-    private val itemClickListener: (Uri, Int, String?) -> Unit
+    private val itemClickListener: (Uri, Int, Int?) -> Unit
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,9 +26,9 @@ class ImageAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val (image, review) = imagesWithReviews[position]
-        holder.imageView.setImageURI(image.imageSrc)
+        holder.imageView.setImageURI(Uri.parse(image.imageSrc))
         holder.imageView.setOnClickListener {
-            itemClickListener(image.imageSrc, image.imageId, review?.comment)
+            itemClickListener(Uri.parse(image.imageSrc), image.imageId, review?.reviewId)
         }
     }
 
