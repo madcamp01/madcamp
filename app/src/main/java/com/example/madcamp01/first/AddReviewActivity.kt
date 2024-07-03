@@ -37,7 +37,6 @@ class AddReviewActivity : AppCompatActivity() {
     private lateinit var ratingBar: RatingBar
     private lateinit var imageButton: ImageButton
     private lateinit var reviewAddButton: Button
-    private lateinit var cancelButton: Button
 
     private var selectedImageUri: Uri? = null
 
@@ -67,7 +66,6 @@ class AddReviewActivity : AppCompatActivity() {
         ratingBar = findViewById(R.id.ratingBar)
         imageButton = findViewById(R.id.imageButton)
         reviewAddButton = findViewById(R.id.reviewAddButton)
-        cancelButton = findViewById(R.id.cancelButton)
 
         imageButton.setOnClickListener {
             showImagePickerDialog()
@@ -75,10 +73,6 @@ class AddReviewActivity : AppCompatActivity() {
 
         reviewAddButton.setOnClickListener {
             saveReview()
-        }
-
-        cancelButton.setOnClickListener {
-            finish()
         }
     }
 
