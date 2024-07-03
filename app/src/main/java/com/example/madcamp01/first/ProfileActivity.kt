@@ -269,13 +269,13 @@ class ProfileActivity : AppCompatActivity() {
             personName = editTextName.text.toString(),
             contactInfo = editTextPhoneNumber.text.toString(),
             memo = editTextStatus.text.toString(),
-            profilePicture = selectedImageUri?.let { getRealPathFromURI(this, it) }?.let { Uri.parse(it) } ?: contact.profilePicture
+            profilePicture = (selectedImageUri?.let { getRealPathFromURI(this, it) }?.let { Uri.parse(it) } ?: selectedImageUri)!!
         )
 
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getInstance(applicationContext)
             database.contactDao().updateContact(updatedContact)
-
+            Log.d("profile", "picture: ${updatedContact.profilePicture}")
             withContext(Dispatchers.Main) {
                 contact = updatedContact
                 toggleEditMode(false)
@@ -295,6 +295,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun getRealPathFromURI(context: Context, uri: Uri): String? {
+        Log.d("getRealPathFromURI", "URI: $uri")
+
+        // Document URI
         if (DocumentsContract.isDocumentUri(context, uri)) {
             if ("com.android.providers.media.documents" == uri.authority) {
                 val documentId = DocumentsContract.getDocumentId(uri)
@@ -303,10 +306,23 @@ class ProfileActivity : AppCompatActivity() {
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id.toLong()
                 )
                 return getDataColumn(context, contentUri, null, null)
+            } else if ("com.android.providers.downloads.documents" == uri.authority) {
+                val documentId = DocumentsContract.getDocumentId(uri)
+                val contentUri = ContentUris.withAppendedId(
+                    Uri.parse("content://downloads/public_downloads"), documentId.toLong()
+                )
+                return getDataColumn(context, contentUri, null, null)
             }
-        } else if ("content".equals(uri.scheme, ignoreCase = true)) {
+        }
+        // Content URI
+        else if ("content".equals(uri.scheme, ignoreCase = true)) {
             return getDataColumn(context, uri, null, null)
         }
+        // File URI
+        else if ("file".equals(uri.scheme, ignoreCase = true)) {
+            return uri.path
+        }
+
         return null
     }
 
@@ -319,6 +335,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         return null
     }
+
 
     private fun loadReviews() {
         CoroutineScope(Dispatchers.IO).launch {
