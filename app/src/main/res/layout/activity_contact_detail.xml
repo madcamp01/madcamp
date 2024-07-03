@@ -79,8 +79,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="7dp"
                 android:visibility="gone" />
         </LinearLayout>
 
@@ -97,7 +95,8 @@
             android:layout_height="wrap_content"
             android:hint="직업"
             android:textSize="15sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginLeft="10dp"/>
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"

@@ -28,7 +28,7 @@
                 android:layout_width="234dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="Search Contacts"
+                android:hint="검색"
                 android:textSize="20sp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -36,7 +36,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="25dp"
                 app:civ_border_color="@color/black"
                 app:civ_border_overlay="true"
                 app:civ_border_width="2dp" />
