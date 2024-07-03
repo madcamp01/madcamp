@@ -11,7 +11,7 @@ import com.example.madcamp01.DB.Entities.Review
 import com.example.madcamp01.R
 
 class ImageAdapter(
-    private val imagesWithReviews: List<Pair<Image, Review?>>,
+    private val imagesWithReviews: List<Pair<Review,Image?>>,
     private val itemClickListener: (Uri, Int, Int?) -> Unit
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
@@ -25,10 +25,10 @@ class ImageAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val (image, review) = imagesWithReviews[position]
-        holder.imageView.setImageURI(Uri.parse(image.imageSrc))
+        val (review,image) = imagesWithReviews[position]
+        holder.imageView.setImageURI(Uri.parse(image?.imageSrc))
         holder.imageView.setOnClickListener {
-            itemClickListener(Uri.parse(image.imageSrc), image.imageId, review?.reviewId)
+            itemClickListener(Uri.parse(image?.imageSrc), image?.imageId!!, review.reviewId)
         }
     }
 

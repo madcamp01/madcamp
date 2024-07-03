@@ -58,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             selectedImageUri = it
-            Log.d("permission","pickImage:$selectedImageUri")
+            Log.d("permission", "pickImage:$selectedImageUri")
 
             imageView.setImageURI(it)
 
@@ -68,12 +68,30 @@ class ProfileActivity : AppCompatActivity() {
             } catch (e: SecurityException) {
                 e.printStackTrace()
             }
-    }
+        }
     }
 
     private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
-        if (success) {
+        if (success && selectedImageUri != null) {
             imageView.setImageURI(selectedImageUri)
+        }
+    }
+
+    private val requestCameraPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            takePhotoIfPermissionGranted()
+        } else {
+            Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            showPermissionSettingsDialog()
+        }
+    }
+
+    private val requestStoragePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            pickImage.launch("image/*")
+        } else {
+            Toast.makeText(this, "스토리지 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            showPermissionSettingsDialog()
         }
     }
 
@@ -89,7 +107,6 @@ class ProfileActivity : AppCompatActivity() {
         textStatus = findViewById(R.id.textStatus)
         editTextStatus = findViewById(R.id.editTextStatus)
         buttonEdit = findViewById(R.id.buttonEdit)
-//        deleteButton = findViewById(R.id.deleteButton)
         reviewRecyclerView = findViewById(R.id.reviewRecyclerView)
         reviewEditButton = findViewById(R.id.reviewEditButton)
         deleteSelectedReviewsButton = findViewById(R.id.deleteSelectedReviewsButton)
@@ -117,10 +134,6 @@ class ProfileActivity : AppCompatActivity() {
                 toggleEditMode(true)
             }
         }
-
-//        deleteButton.setOnClickListener {
-//            deleteContact()
-//        }
 
         reviewEditButton.setOnClickListener {
             toggleReviewEditMode(true)
@@ -150,9 +163,9 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun checkCameraPermissionAndTakePhoto() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            takePhoto()
+            takePhotoIfPermissionGranted()
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+            requestCameraPermission.launch(Manifest.permission.CAMERA)
         }
     }
 
@@ -160,51 +173,26 @@ class ProfileActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 pickImage.launch("image/*")
-                Log.d("permission","$selectedImageUri")
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+                requestStoragePermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         } else {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 pickImage.launch("image/*")
-                Log.d("permission","$selectedImageUri")
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+                requestStoragePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
         }
     }
 
-    private fun takePhoto() {
-        Log.d("permission","takePhoto: $selectedImageUri")
-
-        val photoUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, ContentValues())!!
-        selectedImageUri = photoUri
-        Log.d("permission","takePhoto: $selectedImageUri")
-
-        takePhoto.launch(photoUri)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    takePhoto()
-                } else {
-                    Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
-                    showPermissionSettingsDialog()
-                }
-            }
-            STORAGE_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    pickImage.launch("image/*")
-                } else {
-                    Toast.makeText(this, "스토리지 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
-                    showPermissionSettingsDialog()
-                }
-            }
+    private fun takePhotoIfPermissionGranted() {
+        val photoUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, ContentValues())
+        if (photoUri != null) {
+            selectedImageUri = photoUri
+            takePhoto.launch(photoUri)
+        } else {
+            Toast.makeText(this, "사진 촬영을 위한 URI를 생성할 수 없습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -258,7 +246,6 @@ class ProfileActivity : AppCompatActivity() {
             editTextStatus.visibility = View.VISIBLE
             editTextStatus.setText(contact.memo)
 
-//            deleteButton.visibility = View.VISIBLE
             imageOverlay.visibility = View.VISIBLE
             imageAddIcon.visibility = View.VISIBLE
         } else {
@@ -272,7 +259,6 @@ class ProfileActivity : AppCompatActivity() {
             textStatus.visibility = View.VISIBLE
             editTextStatus.visibility = View.GONE
 
-//            deleteButton.visibility = View.GONE
             imageOverlay.visibility = View.GONE
             imageAddIcon.visibility = View.GONE
         }
@@ -294,19 +280,20 @@ class ProfileActivity : AppCompatActivity() {
                 contact = updatedContact
                 toggleEditMode(false)
                 loadContact()
-//                setResult(Activity.RESULT_OK, Intent().apply {
-//                    putExtra("PROFILE_URI", contact.profilePicture.toString())
-//                })
+                setResult(Activity.RESULT_OK, Intent().apply {
+                    putExtra("PROFILE_URI", contact.profilePicture.toString())
+                })
             }
         }
-
     }
+
     override fun onBackPressed() {
         setResult(RESULT_OK, Intent().apply {
             putExtra("PROFILE_URI", contact.profilePicture.toString())
         })
         super.onBackPressed()
     }
+
     fun getRealPathFromURI(context: Context, uri: Uri): String? {
         if (DocumentsContract.isDocumentUri(context, uri)) {
             if ("com.android.providers.media.documents" == uri.authority) {
@@ -332,17 +319,6 @@ class ProfileActivity : AppCompatActivity() {
         }
         return null
     }
-//    private fun deleteContact() {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val database = AppDatabase.getInstance(applicationContext)
-//            database.contactDao().deleteContact(contact)
-//
-//            withContext(Dispatchers.Main) {
-//                setResult(RESULT_OK) // 삭제 후 결과 설정
-//                finish()
-//            }
-//        }
-//    }
 
     private fun loadReviews() {
         CoroutineScope(Dispatchers.IO).launch {
