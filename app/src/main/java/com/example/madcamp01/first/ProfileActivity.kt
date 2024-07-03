@@ -294,9 +294,18 @@ class ProfileActivity : AppCompatActivity() {
                 contact = updatedContact
                 toggleEditMode(false)
                 loadContact()
-                setResult(RESULT_OK) // 변경 사항이 있을 때 RESULT_OK 설정
+//                setResult(Activity.RESULT_OK, Intent().apply {
+//                    putExtra("PROFILE_URI", contact.profilePicture.toString())
+//                })
             }
         }
+
+    }
+    override fun onBackPressed() {
+        setResult(RESULT_OK, Intent().apply {
+            putExtra("PROFILE_URI", contact.profilePicture.toString())
+        })
+        super.onBackPressed()
     }
     fun getRealPathFromURI(context: Context, uri: Uri): String? {
         if (DocumentsContract.isDocumentUri(context, uri)) {

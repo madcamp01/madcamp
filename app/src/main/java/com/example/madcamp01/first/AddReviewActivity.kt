@@ -181,7 +181,7 @@ class AddReviewActivity : AppCompatActivity() {
             if (placeId == null) {
                 placeId = insertPlace(database, placeName)
             }
-            val imageUri =  selectedImageUri.let { getRealPathFromURI(parent, it!!) }?.let{Uri.parse(it)}?:selectedImageUri
+            val imageUri = selectedImageUri?.let { getRealPathFromURI(applicationContext, it) }?.let { Uri.parse(it) } ?: selectedImageUri
             var imageId = getImageId(database, imageUri.toString())
 
             if (imageId == null) {

@@ -85,4 +85,5 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation ("com.kakao.maps.open:android:2.9.7")
     implementation("com.google.code.gson:gson:2.8.6")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }

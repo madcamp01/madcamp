@@ -1,5 +1,6 @@
 package com.example.madcamp01.third
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -27,7 +28,7 @@ class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imageUri = withContext(Dispatchers.IO) {
                 AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc
             }
-            reviewImage.setImageURI(imageUri)
+            reviewImage.setImageURI(Uri.parse(imageUri))
         }
     }
 }

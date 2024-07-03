@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ class FirstFragment : Fragment() {
     private val REQUEST_CODE = 1
     private lateinit var recyclerView: RecyclerView
     private lateinit var contactAdapter: ContactAdapter
+    private lateinit var profileViewButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +43,10 @@ class FirstFragment : Fragment() {
             val intent = Intent(context, AddReviewActivity::class.java)
             startActivity(intent)
         }
-        val profileViewButton:Button = view.findViewById(R.id.profileButton)
+        profileViewButton = view.findViewById(R.id.profileButton)
         profileViewButton.setOnClickListener({
             val intent = Intent(context, ProfileActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,REQUEST_CODE)
         })
         loadContacts()
 
@@ -56,11 +58,12 @@ class FirstFragment : Fragment() {
         val database = AppDatabase.getInstance(requireContext())
         lifecycleScope.launch {
             val contacts = getContactsFromDb(database).filter{it.personId!=1}.sortedBy { it.personName }
+            val profileContact = getContactById(database, 1)
 
-//            if (contacts.isEmpty()) {
-////                insertDummyData(database)
-//                loadContacts() // Dummy data 삽입 후 다시 로드
-//            } else {
+            if (profileContact != null) {
+                profileViewButton.setImageURI(profileContact.profilePicture)
+            }
+
                 contactAdapter = ContactAdapter(contacts) { contact ->
                     val intent = Intent(context, ContactDetailActivity::class.java).apply {
                         putExtra("CONTACT_ID", contact.personId)
@@ -77,33 +80,24 @@ class FirstFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            loadContacts() // 삭제 후 연락처 목록 다시 로드
+            val profileUri = data?.getStringExtra("PROFILE_URI")
+            profileUri?.let {
+                profileViewButton.setImageURI(Uri.parse(it))
+            }
+            loadContacts() // 삭제 후 연락처 목록 다시 로드n
         }
     }
 
-//    private suspend fun insertDummyData(database: AppDatabase) {
-//        val dummyContacts = listOf(
-//            Contact(1, "John Doe", "010-1234-5678", "Friend from work", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img1)),
-//            Contact(2, "Jane Smith", "010-2345-6789", "Gym buddy", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img2)),
-//            Contact(3, "Mike Johnson", "010-3456-7890", "College friend", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img3)),
-//            Contact(4, "Emily Davis", "010-4567-8901", "Neighbor", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img4)),
-//            Contact(5, "Sarah Brown", "010-5678-9012", "Book club member", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img5)),
-//            Contact(6, "Chris Wilson", "010-6789-0123", "Cousin", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img6)),
-//            Contact(7, "Jessica Lee", "010-7890-1234", "High school friend", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img7)),
-//            Contact(8, "David Kim", "010-8901-2345", "Team member", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img8)),
-//            Contact(9, "Laura Martinez", "010-9012-3456", "Sister", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img9)),
-//            Contact(10, "James Anderson", "010-0123-4567", "Brother", Uri.parse("android.resource://com.example.madcamp01/" + R.drawable.img10))
-//        )
-//        withContext(Dispatchers.IO) {
-//            database.contactDao().apply {
-//                dummyContacts.forEach { insertContact(it) }
-//            }
-//        }
-//    }
+
 
     private suspend fun getContactsFromDb(database: AppDatabase): List<Contact> {
         return withContext(Dispatchers.IO) {
             database.contactDao().getAllContacts()
+        }
+    }
+    private suspend fun getContactById(database: AppDatabase, contactId: Int): Contact? {
+        return withContext(Dispatchers.IO) {
+            database.contactDao().getContactById(contactId)
         }
     }
 }
