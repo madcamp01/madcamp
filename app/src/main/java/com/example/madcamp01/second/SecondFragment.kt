@@ -40,7 +40,7 @@ class SecondFragment : Fragment() {
     private fun loadImages() {
         val database = AppDatabase.getInstance(requireContext())
         lifecycleScope.launch {
-            val imagesWithReviews = getImagesWithReviewsFromDb(database)
+            val imagesWithReviews = getImagesWithReviewsFromDb(database).sortedByDescending { it.first.date }
             imageAdapter = ImageAdapter(imagesWithReviews) { imageUri, imageId, reviewId ->
                 val intent = Intent(context, FullScreenImageActivity::class.java).apply {
                     putExtra("IMAGE_URI", imageUri.toString())
