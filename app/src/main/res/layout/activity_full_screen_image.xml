@@ -6,22 +6,24 @@
     <ImageView
         android:id="@+id/fullScreenImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="505dp"
         android:layout_above="@+id/reviewRecyclerView"
-        android:layout_marginBottom="-226dp"
+        android:layout_marginBottom="-1dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerInside" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="1dp"
         android:background="@android:color/white"
-        android:padding="16dp"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:visibility="visible"
-        android:layout_marginTop="0dp"/>
+        android:padding="16dp"
+        android:visibility="visible" />
 
 </RelativeLayout>
