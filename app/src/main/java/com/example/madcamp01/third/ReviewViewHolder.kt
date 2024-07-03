@@ -28,7 +28,7 @@ class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imageUri = withContext(Dispatchers.IO) {
                 Uri.parse(AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc)
             }
-            reviewImage.setImageURI(imageUri)
+            reviewImage.setImageURI(Uri.parse(imageUri))
         }
     }
 }
