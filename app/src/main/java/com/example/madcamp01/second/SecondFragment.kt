@@ -53,13 +53,13 @@ class SecondFragment : Fragment() {
         }
     }
 
-    private suspend fun getImagesWithReviewsFromDb(database: AppDatabase): List<Pair<Image, Review?>> {
+    private suspend fun getImagesWithReviewsFromDb(database: AppDatabase): List<Pair<Review, Image?>> {
         return withContext(Dispatchers.IO) {
             val images = database.imageDao().getAllImages()
             val reviews = database.reviewDao().getAllReviews()
-            images.map { image ->
-                val review = reviews.find { it.imageId == image.imageId }
-                image to review
+            reviews.map { review ->
+                val image = images.find { it.imageId == review.imageId }
+                review to image
             }
         }
     }
