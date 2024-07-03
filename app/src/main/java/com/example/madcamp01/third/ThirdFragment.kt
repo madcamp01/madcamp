@@ -59,6 +59,10 @@ class ThirdFragment : Fragment() {
                 kakaoMap = map
                 labelManager = kakaoMap.labelManager!!
 
+                // 처음 시작할 때 KAIST Main Gate로 이동
+                val initialPosition = LatLng.from(36.3726, 127.3605)
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
+
                 lifecycleScope.launch {
                     val database = AppDatabase.getInstance(requireContext())
                     val places = getPlacesFromDb(database)
@@ -89,9 +93,10 @@ class ThirdFragment : Fragment() {
                                 database.reviewDao().getReviewsByPlaceId(place.placeId)
                             }
 
-                            // Start ReviewListActivity and pass the reviews
+                            // Start ReviewListActivity and pass the reviews and place name
                             val intent = Intent(requireContext(), ReviewListActivity::class.java).apply {
                                 putExtra("REVIEWS", reviews as Serializable)
+                                putExtra("PLACE_NAME", place.placeName)
                             }
                             startActivity(intent)
                         } else {
@@ -135,8 +140,8 @@ class ThirdFragment : Fragment() {
         }
 
         if (places.isNotEmpty()) {
-            val firstPlace = places.first()
-            val initialPosition = LatLng.from(firstPlace.latitude, firstPlace.longitude)
+            // KAIST Main Gate로 이동
+            val initialPosition = LatLng.from(36.3726, 127.3605)
             kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
         }
     }

@@ -26,7 +26,7 @@ class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         reviewDate.text = review.date
         GlobalScope.launch(Dispatchers.Main) {
             val imageUri = withContext(Dispatchers.IO) {
-                AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc
+                Uri.parse(AppDatabase.getInstance(itemView.context).imageDao().getImageById(review.imageId)!!.imageSrc)
             }
             reviewImage.setImageURI(Uri.parse(imageUri))
         }
