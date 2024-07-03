@@ -4,7 +4,7 @@
 
 ---
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/c3920f71-d96c-4936-b46b-ba55e910beac" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/96307eda-f687-41da-af61-83976ae17aff" width="300" height="550">
 
 WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니다.
 
@@ -20,7 +20,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 기민수
 
-[https://github.com/banna11](https://github.com/banna117)7
+[https://github.com/banna117](https://github.com/banna117)
 
 박지은
 
@@ -34,11 +34,11 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 ### Intro & TabLayout
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/ec730e4d-1ef3-4c0e-b1a5-810e2ca4e1a0" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/69281c0a-c1a5-4512-804a-c04d63b660da" width="300" height="550">
 
 앱을 처음 실행했을 때 2초간 나타나는 로딩화면을 `splash`로 구현
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/01af92c0-7fb5-46c8-a146-a13dc3fcad6d" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/bdb91ef5-903e-46b6-99c3-69763a14509e" width="300" height="550">
 
 `TabLayout`을 적용해 `TabPagerAdapter`를 이용해 각 `Fragment`를 볼 수 있도록 구현
 
@@ -56,11 +56,11 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 - 이름 검색 기능
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/525b8490-3210-4a41-92be-8bedbbc62337" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/b1ba246f-6d57-453a-8169-77fd7bc9d0dc" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/525de276-c9cf-49fd-8bd7-55f4eb11952b" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/38a2f260-0940-42f4-a600-ee84603e824e" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/6edd0736-d21a-4f5e-91fa-7ca502c6c131" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/bf1dd1a7-5a3b-4a4a-9552-ac550219146a" width="300" height="550">
 
 ## 친구들의 프로필 상세페이지(사진 1)
 
@@ -71,29 +71,17 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 - 친구가 쓴 리뷰들
     - 클릭 시 리뷰 상세화면을 볼 수 있음(사진 4)
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/0c1229ad-c2ca-4b2b-9444-0067f7c780a8" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/a64eb4e9-ef4f-4f0a-8f1f-04261154410f" width="300" height="550">
 
-1
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/243ff611-a4b1-40dd-bdba-2bb6c7ce7c0f" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/733af3dd-ea36-4211-9ff1-68323fa1093f" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/9937864c-f855-4d47-b25f-22dbae841d81" width="300" height="550">
 
-4
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/57492dfb-0bba-4a14-91e4-d72fa54cd22c" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/9b57786b-407d-48c4-8839-0d514233caf7" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/f4c1ebb8-0f5f-4f6c-812c-319551771db1" width="300" height="550">
 
-2
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/602b1158-d116-41d6-9339-fd8ccc169749" width="300" height="550">
-
-5
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/4e9ff45e-e5b3-495c-9765-615c8d0e75ea" width="300" height="550">
-
-3
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/37d7a82d-db5f-4407-96c0-13425807e396" width="300" height="550">
-
-6
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/4c64c53b-67ca-42fd-9ff3-b91f346f8232" width="300" height="550">
 
 ## 사용자의 프로필 탭
 
@@ -104,27 +92,17 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 - 변경된 사진과 삭제된 리뷰들(사진 5)
 - 변경된 프로필 사진(사진 6, 우측 상단)
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/38e4b2de-d2e4-49ac-8481-a966ea7894d2" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/63d89eef-0d0f-4294-855c-ac67e9b7d15e" width="300" height="550">
 
-1
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/1ed1b9ed-c81f-4c7d-b91b-92d485bcbc4d" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-183225_WEWE.jpg" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/60d781b6-bbcd-4ea2-b65e-371b3eb01636" width="300" height="550">
 
-4
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/05cb44b3-3424-4bab-8ade-23dfeec51cde" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/bfe9f18e-bf19-4219-b774-6b91acdb658e" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/7f6cfa5e-3a26-480c-b3fb-f28ec5d2073f" width="300" height="550">
 
-2
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-192205_WEWE.jpg" width="300" height="550">
-
-5
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/0c1229ad-c2ca-4b2b-9444-0067f7c780a8" width="300" height="550">
-
-3
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-192321_WEWE.jpg" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/99ef6941-256b-43d7-b86a-7722cfe67760" width="300" height="550">
 
 ## 리뷰 작성 페이지
 
@@ -133,29 +111,17 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 - 리뷰 작성 후 작성한 리뷰 프로필 탭에서 확인 가능(사진 3, 4)
 - 작성한 리뷰 탭2에서 확인 가능(사진 5, 6)
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/59e52367-9ccf-484d-8ff0-b1cdb25bc45e" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/390b68e5-d40d-42ef-87b4-0866a142ab22" width="300" height="550">
 
-1
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/e9ea83e0-bb65-4883-954a-ff8c4d867d0b" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-192455_WEWE.jpg" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/20abd282-c3ae-4ba6-a1a4-4720dc7aa83a" width="300" height="550">
 
-4
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/4c59c4b3-58c4-4879-b556-ba894e647ce2" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/f2ec7f2b-8056-4e5e-9382-f287e85f7711" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/a40e0a97-9791-46b0-9a1c-fc0ff6121c67" width="300" height="550">
 
-2
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-192506_WEWE.jpg" width="300" height="550">
-
-5
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/60c3fdc1-be63-4222-96ec-093e147a44dd" width="300" height="550">
-
-3
-
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/Screenshot_20240703-192512_WEWE.jpg" width="300" height="550">
-
-6
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/156b9d9e-ef17-4176-9708-1a21680c83fe" width="300" height="550">
 
 상세 설명
 
@@ -201,9 +167,9 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 친구들의 게시글만 모아 볼 수 있는 탭😀
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/54d0ea34-0c61-4010-8848-2bf74d5eec88" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/5e933577-79ee-4ea7-8116-7c0df8a528d0" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/0e3739e7-e2a1-438c-bd9e-9f4b2d12be24" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/8155134f-8cd4-411d-9935-bdfd6e13aab0" width="300" height="550">
 
 **`RecyclerView`를 이용하여 친구들의 게시글을 목록 형태로 표시**
 
@@ -236,9 +202,9 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 지도에서 친구들의 리뷰를 확인할 수 있는 탭😎
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/5b8ec994-d3aa-4119-8798-8fc9227a60b5" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/5fca831c-0f59-4024-831e-bc4a34616249" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/5c216414-ca8e-45ae-915e-3ef17099d475" width="300" height="550">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/07d88980-afeb-4b40-a2ec-b25fa68efd95" width="300" height="550">
 
 **`MapView`를 이용하여 지도 상에 표시된 장소와 해당 장소의 리뷰를 볼 수 있음**
 
