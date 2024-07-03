@@ -73,9 +73,9 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 <img src="https://github.com/madcamp01/madcamp/assets/70465226/a64eb4e9-ef4f-4f0a-8f1f-04261154410f" width="300" height="550">
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/243ff611-a4b1-40dd-bdba-2bb6c7ce7c0f" width="300" height="550">
-
 <img src="https://github.com/madcamp01/madcamp/assets/70465226/9937864c-f855-4d47-b25f-22dbae841d81" width="300" height="550">
+
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/243ff611-a4b1-40dd-bdba-2bb6c7ce7c0f" width="300" height="550">
 
 <img src="https://github.com/madcamp01/madcamp/assets/70465226/57492dfb-0bba-4a14-91e4-d72fa54cd22c" width="300" height="550">
 
