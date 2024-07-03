@@ -61,7 +61,7 @@ class ThirdFragment : Fragment() {
 
                 // 처음 시작할 때 KAIST Main Gate로 이동
                 val initialPosition = LatLng.from(36.3726, 127.3605)
-                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 10))
 
                 lifecycleScope.launch {
                     val database = AppDatabase.getInstance(requireContext())

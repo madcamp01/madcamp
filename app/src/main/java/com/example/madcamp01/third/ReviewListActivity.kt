@@ -23,10 +23,11 @@ class ReviewListActivity : Activity() { // 변경: AppCompatActivity에서 Activ
         reviewRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val reviews = intent.getSerializableExtra("REVIEWS") as? List<Review> ?: emptyList()
+        val sortedReviews = reviews.sortedByDescending { it.date }
         val placeName = intent.getStringExtra("PLACE_NAME")
 
         placeNameTextView.text = placeName
-        reviewAdapter = ReviewAdapter(reviews)
+        reviewAdapter = ReviewAdapter(sortedReviews)
         reviewRecyclerView.adapter = reviewAdapter
     }
 }
