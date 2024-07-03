@@ -59,12 +59,13 @@ class ThirdFragment : Fragment() {
                 kakaoMap = map
                 labelManager = kakaoMap.labelManager!!
 
+                // 처음 시작할 때 KAIST Main Gate로 이동
+                val initialPosition = LatLng.from(36.3726, 127.3605)
+                kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
+
                 lifecycleScope.launch {
                     val database = AppDatabase.getInstance(requireContext())
                     val places = getPlacesFromDb(database)
-                    if (places.isEmpty()) {
-                        insertDummyData(database)
-                    }
                     loadPlaces(database)
                 }
 
@@ -105,21 +106,6 @@ class ThirdFragment : Fragment() {
         return view
     }
 
-    private suspend fun insertDummyData(database: AppDatabase) {
-        val places = listOf(
-            Place(1, "KAIST Main Gate", 36.3726, 127.3605),
-            Place(2, "Expo Science Park", 36.3741, 127.3864),
-            Place(3, "Hanbat Arboretum", 36.3664, 127.3889),
-            Place(4, "Daejeon Museum of Art", 36.3705, 127.3850),
-            Place(5, "Gyejoksan Mountain Red Clay Trail", 36.3956, 127.3725)
-        )
-        withContext(Dispatchers.IO) {
-            database.placeDao().apply {
-                places.forEach { insertPlace(it) }
-            }
-        }
-    }
-
     private suspend fun getPlacesFromDb(database: AppDatabase): List<Place> {
         return withContext(Dispatchers.IO) {
             database.placeDao().getAllPlaces()
@@ -132,12 +118,6 @@ class ThirdFragment : Fragment() {
             val markerPoint = LatLng.from(place.latitude, place.longitude)
             val labelStyle = LabelStyles.from("defaultStyle", LabelStyle.from(R.drawable.marker2))
             labelManager.layer?.addLabel(LabelOptions.from(place.placeName, markerPoint).setStyles(labelStyle))
-        }
-
-        if (places.isNotEmpty()) {
-            val firstPlace = places.first()
-            val initialPosition = LatLng.from(firstPlace.latitude, firstPlace.longitude)
-            kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(initialPosition, 13))
         }
     }
 }

@@ -97,7 +97,7 @@ class GlobalApplication : Application() {
     }
     private suspend fun insertDummyPlaces(database: AppDatabase) {
         val places = listOf(
-            Place(1, "Daejeon Station", 36.3323, 127.4347),
+            Place(1, "KAIST Main Gate", 36.3726, 127.3605),
             Place(2, "Expo Science Park", 36.3741, 127.3864),
             Place(3, "Hanbat Arboretum", 36.3664, 127.3889),
             Place(4, "Daejeon Museum of Art", 36.3705, 127.3850),
