@@ -61,7 +61,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 ![Screenshot_20240703-173217_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/c09a1da6-1b7a-4522-abdc-a079901f14b3.png)
 
-![Screenshot_20240703-174531_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-174531_WEWE.jpg)
+![Screenshot_20240703-174531_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/a9e95fc8-c000-40e9-91f1-806bd537bcde)
 
 ## 친구들의 프로필 상세페이지(사진 1)
 
@@ -72,7 +72,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 - 친구가 쓴 리뷰들
     - 클릭 시 리뷰 상세화면을 볼 수 있음(사진 4)
 
-![Screenshot_20240703-174642_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-174642_WEWE.jpg)
+![Screenshot_20240703-174642_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/afde6d60-0000-471a-8637-9f0c9f2ea006)
 
 1
 
@@ -80,7 +80,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 4
 
-![Screenshot_20240703-174704_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-174704_WEWE.jpg)
+![Screenshot_20240703-174704_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/57dca2f7-a17e-43fb-8e1e-5b54331bf9d5)
 
 2
 
@@ -88,11 +88,13 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 5
 
-![Screenshot_20240703-174813_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-174813_WEWE.jpg)
+![Screenshot_20240703-174813_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/9906ac7d-9519-49f9-a8d9-363dac543ac2)
+
 
 3
 
-![Screenshot_20240703-183146_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-183146_WEWE.jpg)
+![Screenshot_20240703-183146_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/a16489e6-cb72-4a7d-b21a-d34becfbd9f6)
+
 
 6
 
@@ -109,7 +111,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 1
 
-![Screenshot_20240703-183225_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-183225_WEWE.jpg)
+![Screenshot_20240703-183225_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/fac8e86e-70e5-4ea7-b891-98e46abcad51)
 
 4
 
@@ -117,7 +119,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 2
 
-![Screenshot_20240703-192205_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-192205_WEWE.jpg)
+![Screenshot_20240703-192205_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/adf91405-fcac-4c37-96b6-98f69c360fa8)
 
 5
 
@@ -125,7 +127,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 3
 
-![Screenshot_20240703-192321_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-192321_WEWE.jpg)
+![Screenshot_20240703-192321_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/baf57dcd-f03c-441e-aaa2-2dfd45086e75)
 
 ## 리뷰 작성 페이지
 
@@ -138,7 +140,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 1
 
-![Screenshot_20240703-192455_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-192455_WEWE.jpg)
+![Screenshot_20240703-192455_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/6476ea6b-944f-4f29-bf77-30f05e7ffd36)
 
 4
 
@@ -146,7 +148,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 2
 
-![Screenshot_20240703-192506_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-192506_WEWE.jpg)
+![Screenshot_20240703-192506_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/7915582a-d7e8-4783-a351-959a996a6417)
 
 5
 
@@ -154,7 +156,8 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 3
 
-![Screenshot_20240703-192512_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-192512_WEWE.jpg)
+![Screenshot_20240703-192512_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/063550ec-3b93-4fd6-820d-4e77b0c664d5)
+
 
 6
 
@@ -204,7 +207,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 ![Screenshot_20240703-173713_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-173713_WEWE.jpg)
 
-![Screenshot_20240703-173724_WEWE.jpg](WEWE%20cbe8c208c87f4531955a158f31b0a023/Screenshot_20240703-173724_WEWE.jpg)
+![Screenshot_20240703-173724_WEWE](https://github.com/madcamp01/madcamp/assets/70465226/f960d2e5-e89b-4c9a-85b8-cffa07d96497)
 
 **`RecyclerView`를 이용하여 친구들의 게시글을 목록 형태로 표시**
 
