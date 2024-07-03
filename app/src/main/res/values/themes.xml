@@ -21,4 +21,14 @@
     <style name="Theme.Madcamp01.Splash" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/colorPrimaryLight</item>
     </style>
+
+    <!-- Custom ActionBar Theme -->
+    <style name="ActionBarTheme" parent="Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/ActionBarTitleText</item>
+    </style>
+
+    <!-- Custom ActionBar Title Text Style -->
+    <style name="ActionBarTitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/milestonebrush</item>
+    </style>
 </resources>

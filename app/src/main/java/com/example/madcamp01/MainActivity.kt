@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
         // TabLayout과 ViewPager2를 연결
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "친구"
-                1 -> "피드"
-                2 -> "맵"
+                0 -> "\uD83D\uDE0A "
+                1 -> "\uD83D\uDD0D "
+                2 -> "\uD83D\uDDFA\uFE0F"
                 else -> null
             }
         }.attach()
