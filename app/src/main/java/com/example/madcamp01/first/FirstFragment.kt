@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -34,7 +35,7 @@ class FirstFragment : Fragment() {
     private lateinit var contactAdapter: ContactAdapter
     private lateinit var profileViewButton: ImageView
     private lateinit var searchEditText: EditText
-    private lateinit var noDataTextView: TextView
+    private lateinit var noDataTextView: LinearLayout
     private lateinit var allContacts: List<Contact> // 모든 연락처를 저장하는 리스트
 
     override fun onCreateView(
