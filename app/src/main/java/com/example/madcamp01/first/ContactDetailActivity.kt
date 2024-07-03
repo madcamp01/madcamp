@@ -83,7 +83,7 @@ class ContactDetailActivity : AppCompatActivity() {
                 textName.text = contact.personName
                 textPhoneNumber.text = contact.contactInfo
                 textStatus.text = contact.memo
-                reviewListText.text = "${contactName} 님의 리뷰 목록입니다."
+                reviewListText.text = "${contact.personName} 님의 리뷰 목록입니다."
             }
         }
     }
@@ -140,6 +140,7 @@ class ContactDetailActivity : AppCompatActivity() {
                 contact = updatedContact
                 toggleEditMode(false)
                 loadContact()
+                reviewListText.text = "${updatedContact.personName} 님의 리뷰 목록입니다."
                 setResult(RESULT_OK)
             }
         }
@@ -161,11 +162,11 @@ class ContactDetailActivity : AppCompatActivity() {
             val database = AppDatabase.getInstance(applicationContext)
             var reviews = database.reviewDao().getReviewsByContactId(contactId).sortedByDescending { it.date }
 
-            if(reviews.isEmpty()) {
-                insertDummyData(database)
-                reviews = database.reviewDao().getReviewsByContactId(contactId)
-                    .sortedByDescending { it.date }
-            }
+//            if(reviews.isEmpty()) {
+//                insertDummyData(database)
+//                reviews = database.reviewDao().getReviewsByContactId(contactId)
+//                    .sortedByDescending { it.date }
+//            }
             withContext(Dispatchers.Main) {
                 // RecyclerView 설정 및 리뷰 데이터 표시 코드 추가
                 reviewRecyclerView.adapter = ReviewAdapter(reviews)
@@ -174,33 +175,33 @@ class ContactDetailActivity : AppCompatActivity() {
         }
     }
 //    //tobedeleted
-    private suspend fun insertDummyData(database: AppDatabase) {
-        val dummyReviews = listOf(
-            Review(1, 1, 1, 1, 4, "Great place!", "2023-06-01"),
-            Review(2, 2, 2, 2, 5, "Amazing experience!", "2023-06-02"),
-            Review(3, 3, 3, 3, 3, "It was okay.", "2023-06-03"),
-            Review(4, 4, 4, 4, 4, "Nice and peaceful.", "2023-06-04"),
-            Review(5, 5, 5, 5, 5, "Loved it!", "2023-06-05"),
-            Review(6, 1, 6, 6, 4, "Good place to visit.", "2023-06-06"),
-            Review(7, 2, 7, 7, 5, "Wonderful!", "2023-06-07"),
-            Review(8, 3, 8, 8, 3, "Average.", "2023-06-08"),
-            Review(9, 4, 9, 9, 4, "Quite good.", "2023-06-09"),
-            Review(10, 5, 10, 10, 5, "Excellent!", "2023-06-10"),
-            Review(11, 1, 1, 11, 4, "Enjoyed it.", "2023-06-11"),
-            Review(12, 2, 2, 12, 5, "Fantastic!", "2023-06-12"),
-            Review(13, 3, 3, 13, 3, "Not bad.", "2023-06-13"),
-            Review(14, 4, 4, 14, 4, "Pleasant.", "2023-06-14"),
-            Review(15, 5, 5, 15, 5, "Amazing!", "2023-06-15"),
-            Review(16, 1, 6, 16, 4, "Worth a visit.", "2023-06-16"),
-            Review(17, 2, 7, 17, 5, "Highly recommend!", "2023-06-17"),
-            Review(18, 3, 8, 18, 3, "It's okay.", "2023-06-18"),
-            Review(19, 4, 9, 19, 4, "Good.", "2023-06-19"),
-            Review(20, 5, 10, 20, 5, "Nice", "2023-06-28")
-        )
-        withContext(Dispatchers.IO) {
-            database.reviewDao().apply {
-                dummyReviews.forEach { insertReview(it) }
-            }
-        }
-    }
+//    private suspend fun insertDummyData(database: AppDatabase) {
+//        val dummyReviews = listOf(
+//            Review(1, 1, 1, 1, 4, "Great place!", "2023-06-01"),
+//            Review(2, 2, 2, 2, 5, "Amazing experience!", "2023-06-02"),
+//            Review(3, 3, 3, 3, 3, "It was okay.", "2023-06-03"),
+//            Review(4, 4, 4, 4, 4, "Nice and peaceful.", "2023-06-04"),
+//            Review(5, 5, 5, 5, 5, "Loved it!", "2023-06-05"),
+//            Review(6, 1, 6, 6, 4, "Good place to visit.", "2023-06-06"),
+//            Review(7, 2, 7, 7, 5, "Wonderful!", "2023-06-07"),
+//            Review(8, 3, 8, 8, 3, "Average.", "2023-06-08"),
+//            Review(9, 4, 9, 9, 4, "Quite good.", "2023-06-09"),
+//            Review(10, 5, 10, 10, 5, "Excellent!", "2023-06-10"),
+//            Review(11, 1, 1, 11, 4, "Enjoyed it.", "2023-06-11"),
+//            Review(12, 2, 2, 12, 5, "Fantastic!", "2023-06-12"),
+//            Review(13, 3, 3, 13, 3, "Not bad.", "2023-06-13"),
+//            Review(14, 4, 4, 14, 4, "Pleasant.", "2023-06-14"),
+//            Review(15, 5, 5, 15, 5, "Amazing!", "2023-06-15"),
+//            Review(16, 1, 6, 16, 4, "Worth a visit.", "2023-06-16"),
+//            Review(17, 2, 7, 17, 5, "Highly recommend!", "2023-06-17"),
+//            Review(18, 3, 8, 18, 3, "It's okay.", "2023-06-18"),
+//            Review(19, 4, 9, 19, 4, "Good.", "2023-06-19"),
+//            Review(20, 5, 10, 20, 5, "Nice", "2023-06-28")
+//        )
+//        withContext(Dispatchers.IO) {
+//            database.reviewDao().apply {
+//                dummyReviews.forEach { insertReview(it) }
+//            }
+//        }
+//    }
 }

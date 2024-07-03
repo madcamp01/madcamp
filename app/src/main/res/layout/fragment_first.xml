@@ -52,14 +52,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
+        <LinearLayout
             android:id="@+id/noDataTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Data"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사람이 없어용"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/marker"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button
