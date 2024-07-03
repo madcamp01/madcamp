@@ -38,7 +38,7 @@ WEWE는 연락처가 있는 친친들의 취향을 엿볼 수 있는 앱입니�
 
 앱을 처음 실행했을 때 2초간 나타나는 로딩화면을 `splash`로 구현
 
-<img src="https://github.com/madcamp01/madcamp/assets/70465226/bdb91ef5-903e-46b6-99c3-69763a14509e" width="300" height="200">
+<img src="https://github.com/madcamp01/madcamp/assets/70465226/bdb91ef5-903e-46b6-99c3-69763a14509e" width="300" height="100">
 
 `TabLayout`을 적용해 `TabPagerAdapter`를 이용해 각 `Fragment`를 볼 수 있도록 구현
 
