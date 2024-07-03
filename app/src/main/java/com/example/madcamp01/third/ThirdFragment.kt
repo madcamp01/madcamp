@@ -34,6 +34,7 @@ class ThirdFragment : Fragment() {
         super.onCreate(savedInstanceState)
         // Initialize KakaoMapSdk in onCreate
         KakaoMapSdk.init(requireContext(), "d46a37ed9a48a8af47b08b5f5a338bb4")
+        Log.d("map","here")
     }
 
     override fun onCreateView(
@@ -56,6 +57,7 @@ class ThirdFragment : Fragment() {
             }
         }, object : KakaoMapReadyCallback() {
             override fun onMapReady(map: KakaoMap) {
+                Log.d("map","mapready")
                 kakaoMap = map
                 labelManager = kakaoMap.labelManager!!
 
