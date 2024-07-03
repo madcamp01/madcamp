@@ -1,5 +1,6 @@
 package com.example.madcamp01.third
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import com.kakao.vectormap.label.LabelStyles
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.Serializable
 
 class ThirdFragment : Fragment() {
     private var mapView: MapView? = null
@@ -87,11 +89,11 @@ class ThirdFragment : Fragment() {
                                 database.reviewDao().getReviewsByPlaceId(place.placeId)
                             }
 
-                            // Display reviews in some way (e.g., log or update UI)
-                            reviews.forEach { review ->
-                                Log.d("Review", "Review ID: ${review.reviewId}, Rating: ${review.rating}, Comment: ${review.comment}")
-                                // Update UI with reviews
+                            // Start ReviewListActivity and pass the reviews
+                            val intent = Intent(requireContext(), ReviewListActivity::class.java).apply {
+                                putExtra("REVIEWS", reviews as Serializable)
                             }
+                            startActivity(intent)
                         } else {
                             Log.d("LabelClick", "No place found at this location")
                         }

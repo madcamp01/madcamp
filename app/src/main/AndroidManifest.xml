@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".third.ReviewListActivity"
+            android:exported="false" />
+        <activity
             android:name=".third.LabelTransformActivity"
             android:exported="false" />
         <activity
@@ -70,7 +73,6 @@
         <activity
             android:name=".ViewPagerAdapter"
             android:exported="false" />
-
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
